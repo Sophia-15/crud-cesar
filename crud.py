@@ -22,27 +22,27 @@ def menu():
 
 def emojiNota(nota):
     if nota == 0:
-        return '🌚🌚🌚🌚🌚'
+        return f'{nota} | 🌚🌚🌚🌚🌚'
     elif 1 > nota > 0:
-        return '🌗🌚🌚🌚🌚'
+        return f'{nota} | 🌗🌚🌚🌚🌚'
     elif nota == 1:
-        return '🌕🌚🌚🌚🌚'
-    elif 2 > nota > 1:
-        return '🌕🌗🌚🌚🌚'
+        return f'{nota} | 🌕🌚🌚🌚🌚'
+    elif 2 > nota >= 1.5:
+        return f'{nota} | 🌕🌗🌚🌚🌚'
     elif nota == 2:
-        return '🌕🌕🌚🌚🌚'
-    elif 3 > nota > 2:
-        return '🌕🌕🌗🌚🌚'
+        return f'{nota} | 🌕🌕🌚🌚🌚'
+    elif 3 > nota >= 2.5:
+        return f'{nota} | 🌕🌕🌗🌚🌚'
     elif nota == 3:
-        return '🌕🌕🌕🌚🌚'
-    elif 4 > nota > 3:
-        return '🌕🌕🌕🌗🌚'
+        return f'{nota} | 🌕🌕🌕🌚🌚'
+    elif 4 > nota >= 3.5:
+        return f'{nota} | 🌕🌕🌕🌗🌚'
     elif nota == 4:
-        return '🌕🌕🌕🌕🌚'
-    elif 5 > nota > 4:
-        return '🌕🌕🌕🌕🌗'
+        return f'{nota} | 🌕🌕🌕🌕🌚'
+    elif 5 > nota >= 4.5:
+        return f'{nota} | 🌕🌕🌕🌕🌗'
     elif nota == 5:
-        return '🌕🌕🌕🌕🌕'
+        return f'{nota} | 🌕🌕🌕🌕🌕'
 
 while True:
     menu()
