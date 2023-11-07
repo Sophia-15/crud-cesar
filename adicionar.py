@@ -1,8 +1,6 @@
 import os
 os.system("cls")
-
 biblioteca = {}
-
 def adicionar ():
     numlivro = input("Digite o número para cadastrar o livro: ")
     biblioteca[numlivro] = []
@@ -15,5 +13,4 @@ def adicionar ():
     biblioteca[numlivro].append(genero)
     biblioteca[numlivro].append(dinheiro)
     return biblioteca
-
 print(adicionar())
