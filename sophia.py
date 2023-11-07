@@ -16,9 +16,7 @@ def excluir_livro():
   livro = int(input("Digite o número do livro que deseja excluir: "))
   print(biblioteca.pop(livro, 'Livro não encontrado'))
 
-def filtrar_categoria(valor_categoria):
+def filtrar_categoria(categoria):
   for livro in biblioteca.items():
-    for categoria in livro[1]:
-      if categoria == valor_categoria:
-        print(livro[1])
-
+    if categoria in livro[1]:
+      print(livro[1])
