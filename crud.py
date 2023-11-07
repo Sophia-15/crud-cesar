@@ -1,1 +1,1 @@
-biblioteca = {'Berserk': ['Kentaro Miura', 'Seinen', 24.90]}
+biblioteca = {}
