@@ -19,6 +19,31 @@ def menu():
     else:
         print('CÓDIGO INVÁLIDO')
 
+
+def emojiNota(nota):
+    if nota == 0:
+        return '🌚🌚🌚🌚🌚'
+    elif 1 > nota > 0:
+        return '🌗🌚🌚🌚🌚'
+    elif nota == 1:
+        return '🌕🌚🌚🌚🌚'
+    elif 2 > nota > 1:
+        return '🌕🌗🌚🌚🌚'
+    elif nota == 2:
+        return '🌕🌕🌚🌚🌚'
+    elif 3 > nota > 2:
+        return '🌕🌕🌗🌚🌚'
+    elif nota == 3:
+        return '🌕🌕🌕🌚🌚'
+    elif 4 > nota > 3:
+        return '🌕🌕🌕🌗🌚'
+    elif nota == 4:
+        return '🌕🌕🌕🌕🌚'
+    elif 5 > nota > 4:
+        return '🌕🌕🌕🌕🌗'
+    elif nota == 5:
+        return '🌕🌕🌕🌕🌕'
+
 while True:
     menu()
     saida = menu()
