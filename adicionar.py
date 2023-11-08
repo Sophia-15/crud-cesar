@@ -16,8 +16,7 @@ def adicionar ():
     biblioteca[nome].append(autor)
     biblioteca[nome].append(genero)
     biblioteca[nome].append(dinheiro)
-    if nota >= 0 and nota <= 5:
-        biblioteca[nome].append(nota)
+    biblioteca[nome].append(nota)
     categorias.append(genero)
     gastosvalores.append(dinheiro)
     
