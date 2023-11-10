@@ -5,7 +5,7 @@ biblioteca = {}
 categorias = []
 gastosvalores = []
 
-def adicionar ():
+def adicionar():
     nome = input("Insira o nome do livro que você deseja adicionar: ")
     biblioteca[nome] = []
     autor = input("Agora insira as informações do livro abaixo, começando pelo autor do livro: ")
@@ -25,6 +25,46 @@ def adicionar ():
     
     return biblioteca
 
+def editar(livro):
+    opcao = int(input(f"✏️  Você está na Área de Edição\n{biblioteca}\n[1] Alterar nome\n[2] Alterar autor\n[3] Alterar categoria\n[4] Alterar valor\n[5] Voltar\nDigite o número correspondente: "))
+
+    if opcao == 1:
+       novo_nome = input()
+       biblioteca[novo_nome] = biblioteca.pop(livro, "Valor não encontrado")
+
+    elif opcao == 2:
+        autor = input("Qual é o nome do autor livro? ")
+        biblioteca[livro][0] = autor
+
+    elif opcao == 3:
+         
+        categoria = input("Qual é a categoria do livro? ")
+        
+        biblioteca[livro][1] = categoria
+
+    elif opcao == 4: 
+        gasto = float(input("Qual é o gasto do livro? "))
+        biblioteca[livro][2] = gasto
+
+    elif opcao == 5:
+        menu()
+
+def visualizar_livros():
+  print(biblioteca)
+
+def visualizar_livro(livro):
+  livro = biblioteca.get(livro, 'Livro não encontrado')
+  print(livro)
+
+def excluir():
+  visualizar_livros()
+  livro = int(input("Digite o nome do livro que deseja excluir: "))
+  print(biblioteca.pop(livro, 'Livro não encontrado'))
+
+def filtrar_categoria(categoria):
+  for livro in biblioteca.items():
+    if categoria in livro[1]:
+      print(livro[1])
 
 def menu():
     print(f"📚 Olá Nathália! Bem-vinda ao Sistema de Gerenciamento de Leitura (SGL)")
@@ -68,7 +108,6 @@ def emojiNota(nota):
         return f'{nota} | 🌕🌕🌕🌕🌕'
 
 while True:
-    menu()
     saida = menu()
     if saida == 5:
         break
