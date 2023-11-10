@@ -1,7 +1,8 @@
 biblioteca = {
-  'berserk': ['Berserk', 'Kentaro Miura', 'Seinen', 24.9],
-  'cu': ['Berserk', 'Kentaro Miura', 'Seinen', 24.9],
-  'eu': ['Berserk', 'Kentaro Miura', 'klasjdfk', 24.9],
+  'berserk': ['Kentaro Miura', 'Seinen', 24.9],
+  'nha': ['aaaaaaaaaaaaaa', 'Seinen', 5.9],
+  'cu': ['BBBBBBBBBBBBBBB', 'Seinen', 9],
+  'eu': ['cccccccccccccc', 'klasjdfk', 10],
 }
 
 def visualizar_livros():
