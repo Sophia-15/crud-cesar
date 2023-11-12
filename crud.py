@@ -14,19 +14,20 @@ def adicionar():
 
         nome = input("Digite o nome do livro que você deseja adicionar: ")
         autor = input("Digite o nome do autor: ")
-        genero = input(f"Aqui estão os gêneros atuais dos seus livros: {categorias}\nDigite o(s) gênero(s) do seu livro separados por espaços: ")
+        genero = input(f"Todas as categorias: {categorias}\nDigite o(s) gênero(s) do seu livro separados por espaços: ")
         generoLista = genero.split()
         dinheiro = float(input("Digite o preço: "))
         nota = float(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não leu): "))
 
         biblioteca[nome] = []
         biblioteca[nome].append(autor)
+
         for i in range(len(generoLista)):
             biblioteca[nome].append(generoLista[i])
         biblioteca[nome].append(dinheiro)
 
         if nota >= 0 and nota <= 5:
-            biblioteca[nome].append(nota)
+            biblioteca[nome].append(emojiNota(nota))
         elif nota == 6:
             biblioteca[nome].append("Não avaliado")
         
@@ -124,7 +125,7 @@ def visualizar_livros():
 
 def visualizar_livro(livro):
     livro_encontrado = biblioteca.get(livro, 'Livro não encontrado')
-    print(f"Nome: {livro} \nAutor: {livro_encontrado[0]} \nCategorias: {livro_encontrado[1]} \nPreço: R${livro_encontrado[2]:.2f} \nNota: {livro_encontrado[3]}")
+    print(f"Nome: {livro} \nAutor: {livro_encontrado[0]} \nCategorias: {livro_encontrado[1]} \nPreço: R${float(livro_encontrado[2]):.2f} \nNota: {float(livro_encontrado[3]):.2f}")
 
 def excluir():
     os.system('cls')
