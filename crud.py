@@ -2,7 +2,7 @@ import os
 import time
 
 biblioteca = {}
-categorias = []
+categorias = ['Ação', 'Fantasia', 'Mistério', 'Suspense', 'Ficção Científica', 'Romance', 'Comédia', 'Mangá', 'HQ', 'Terror']
 gastosvalores = []
 
 def adicionar():
@@ -11,25 +11,31 @@ def adicionar():
     if opcao == 1:
         os.system('cls')
         print('📖 Você está cadastrando um novo livro')
-        
+
         nome = input("Digite o nome do livro que você deseja adicionar: ")
         autor = input("Digite o nome do autor: ")
-        genero = input("Digite o genero: ")
-        dinheiro = float(input("Digite o preço: "))
-        nota = float(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não leu): "))
+        genero = input(f"Aqui estão os gêneros atuais dos seus livros: {categorias}\nDigite o(s) gênero(s) do seu livro separados por espaços: ")
+        generoLista = genero.split()
+        dinheiro = input("Digite o preço: ")
+        nota = int(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não leu): "))
 
         biblioteca[nome] = []
         biblioteca[nome].append(autor)
-        biblioteca[nome].append(genero)
+        for i in range(len(generoLista)):
+            biblioteca[nome].append(generoLista[i])
         biblioteca[nome].append(dinheiro)
-        
+
         if nota >= 0 and nota <= 5:
-            biblioteca[nome].append(emojiNota(nota))
+            biblioteca[nome].append(nota)
         elif nota == 6:
             biblioteca[nome].append("Não avaliado")
         
-        categorias.append(genero)
+        if not genero in categorias:
+            for j in range(len(generoLista)):            
+                categorias.append(generoLista[j])
         gastosvalores.append(dinheiro)
+
+        print(biblioteca)
         
         print('✅ Livro cadastrado com sucesso!')
         time.sleep(1)
