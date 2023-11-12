@@ -5,22 +5,23 @@ biblioteca = {}
 categorias = ['Ação', 'Fantasia', 'Mistério', 'Suspense', 'Ficção Científica', 'Romance', 'Comédia', 'Mangá', 'HQ', 'Terror']
 gastosvalores = []
 
-
-def selecionar_livro(livro_selecionado):
+def selecionar_livro(livro_selecionado, categoria = 'padrao'):
     livros = []
     livro_selecionado -= 1
 
-    for livro in biblioteca.keys():
-        livros.append(livro)
-    
-    return livros[livro_selecionado]
+    if categoria == 'padrao':
+        for livro in biblioteca.keys():
+            livros.append(livro)
+        return livros[livro_selecionado]
+    else:
+        return filtrar_categoria(categoria)
+
 
 def selecionar_categoria(categoria_selecionada):
     categoria_selecionada -= 1
 
     return categorias[categoria_selecionada]
 
-    
 def listar_livros():
     livros = []
     for i in biblioteca.keys():
@@ -44,7 +45,7 @@ def adicionar():
         autor = input("Digite o nome do autor: ")
         print(f"Todas as categorias:")
         listar_categorias()
-        genero = input(f"Digite a(s) categoria(s) do seu livro separados por espaços: ").title()
+        genero = input(f"Digite a(s) categoria(s) do seu livro separadas por espaços: ").title()
         generoLista = genero.split()
         dinheiro = float(input("Digite o preço: "))
         nota = float(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não leu): "))
@@ -95,6 +96,7 @@ def editar():
         listar_livros()
         livro_indice = int(input("Digite o número do livro que deseja editar: "))
         livro = selecionar_livro(livro_indice)
+        print(f'Autor atual: {biblioteca[livro][0]}')
         autor = input("Digite o novo autor do livro: ")
         biblioteca[livro][0] = autor
         print('✅ Alterado com sucesso!')
@@ -124,7 +126,7 @@ def editar():
         else:
             strCategorias = livro_encontrado[1] 
         print(f'Categorias atuais: {strCategorias}')
-        categoria = input("Digite as categorias atualizadas do livro:  ").title()
+        categoria = input("Digite as categorias atualizadas do livro: ").title()
         categoriaLista = categoria.split()
         for j in range(len(categoriaLista)):
             if not categoriaLista[j] in categorias:
@@ -141,7 +143,7 @@ def editar():
         listar_livros()
         livro_indice = int(input("Digite o número do livro que deseja editar: "))
         livro = selecionar_livro(livro_indice)
-        print(f'Valor atual do livro: R${biblioteca[livro][2]}')
+        print(f'Valor atual do livro: R${biblioteca[livro][2]:.2f}')
         valor = float(input("Digite o novo valor do livro: "))
         biblioteca[livro][2] = valor
         print('✅ Alterado com sucesso!')
@@ -166,7 +168,6 @@ def editar():
     
     elif opcao == 6:
         menu()
-
 
 def visualizar_livros():
     os.system('cls')
@@ -209,11 +210,11 @@ def visualizar_livros():
             filtrar_categoria(categoria)
             print()
             livro_indice = int(input("Digite o número do livro que deseja visualizar: "))
-            livro = selecionar_livro(livro_indice)
+            livro = selecionar_livro(livro_indice, categoria)
             os.system('cls')
             print('👓 Você está na área de visualização')
             print()
-            visualizar_livro(livro)
+            visualizar_livro(livro[0])
             print()
             opcao2 = int(input('Digite [1] para voltar: '))
 
@@ -226,7 +227,7 @@ def visualizar_livros():
         os.system('cls')
         print('👓 Você está na área de visualização')
         print()
-        print(f'Gasto total: R${sum(gastosvalores):.2f}')
+        print(f'💸 Gasto total: R${sum(gastosvalores):.2f}')
         livros = []
         for i in biblioteca.keys():
             livros.append(i)
@@ -255,7 +256,6 @@ def visualizar_livro(livro):
         strCategorias = livro_encontrado[1]
 
     print(f"Nome: {livro} \nAutor: {livro_encontrado[0]} \nCategorias: {strCategorias} \nPreço: R${float(livro_encontrado[2]):.2f} \nNota: {(livro_encontrado[3])}")
-
 
 def excluir():
     os.system('cls')
@@ -303,7 +303,9 @@ def menu():
     elif acao == 5:
         return 5
     else:
-        print('CÓDIGO INVÁLIDO')
+        os.system('cls')
+        print('⚠️  CÓDIGO INVÁLIDO ⚠️')
+        time.sleep(1)
 
 def emojiNota(nota):
     if nota == 0:
