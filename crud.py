@@ -20,7 +20,7 @@ def adicionar():
         autor = input("Digite o nome do autor: ")
         print(f"Todas as categorias:")
         listar_categorias()
-        genero = input(f"Digite o(s) gênero(s) do seu livro separados por espaços: ")
+        genero = input(f"Digite a(s) categoria(s) do seu livro separados por espaços: ").title()
         generoLista = genero.split()
         dinheiro = float(input("Digite o preço: "))
         nota = float(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não leu): "))
@@ -144,7 +144,7 @@ def listar_livros():
 
 def visualizar_livros():
     os.system('cls')
-    opcao = int(input('👓 Você está na área de visualização\n[1] Visualizar livro\n[2] Visualizar gastos\n[3] Voltar\nDigite o número correspondente: '))
+    opcao = int(input('👓 Você está na área de visualização\n[1] Visualizar livros\n[2] Visualizar gastos\n[3] Voltar\nDigite o número correspondente: '))
 
     if opcao == 1:
         os.system('cls')
@@ -173,7 +173,7 @@ def visualizar_livros():
         for i in range(len(livros)):
             print(f"{i + 1}. {livros[i]} - R${biblioteca[livros[i]][2]:.2f}")
         print()
-        opcao2 = input('Digite [1] para voltar: ')
+        opcao2 = int(input('Digite [1] para voltar: '))
         if opcao2 == 1:
             visualizar_livros()
     elif opcao == 3:
@@ -192,7 +192,7 @@ def visualizar_livro(livro):
                 contVirgula+=1
     else:
         strCategorias = livro_encontrado[1]
-       
+
     print(f"Nome: {livro} \nAutor: {livro_encontrado[0]} \nCategorias: {strCategorias} \nPreço: R${float(livro_encontrado[2]):.2f} \nNota: {(livro_encontrado[3])}")
 
 def selecionar_livro(livro_selecionado):
@@ -251,19 +251,19 @@ def emojiNota(nota):
         return f'🌚🌚🌚🌚🌚'
     elif 1 > nota > 0:
         return f'🌗🌚🌚🌚🌚'
-    elif nota == 1:
+    elif nota == 1 or nota < 1.5:
         return f'🌕🌚🌚🌚🌚'
     elif 2 > nota >= 1.5:
         return f'🌕🌗🌚🌚🌚'
-    elif nota == 2:
+    elif nota == 2 or nota < 2.5:
         return f'🌕🌕🌚🌚🌚'
     elif 3 > nota >= 2.5:
         return f'🌕🌕🌗🌚🌚'
-    elif nota == 3:
+    elif nota == 3 or nota < 3.5:
         return f'🌕🌕🌕🌚🌚'
     elif 4 > nota >= 3.5:
         return f'🌕🌕🌕🌗🌚'
-    elif nota == 4:
+    elif nota == 4 or nota < 4.5:
         return f'🌕🌕🌕🌕🌚'
     elif 5 > nota >= 4.5:
         return f'🌕🌕🌕🌕🌗'
@@ -272,8 +272,6 @@ def emojiNota(nota):
 
 os.system('cls')
 name = input('Digite o seu nome: ')
-
-while True:
-    programa = menu()
-    if programa == 5:
-        break
+acao = 0
+while acao != 5:
+    acao = menu()
