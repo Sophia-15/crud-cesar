@@ -5,6 +5,7 @@ biblioteca = {}
 categorias = ['Ação', 'Fantasia', 'Mistério', 'Suspense', 'Ficção Científica', 'Romance', 'Comédia', 'Mangá', 'HQ', 'Terror']
 gastosvalores = []
 
+
 def selecionar_livro(livro_selecionado):
     livros = []
     livro_selecionado -= 1
@@ -123,7 +124,12 @@ def editar():
         else:
             strCategorias = livro_encontrado[1] 
         print(f'Categorias atuais: {strCategorias}')
-        categoria = input("Digite as categorias atualizadas do livro:  ")
+        categoria = input("Digite as categorias atualizadas do livro:  ").title()
+        categoriaLista = categoria.split()
+        for j in range(len(categoriaLista)):
+            if not categoriaLista[j] in categorias:
+                categorias.append(categoriaLista[j])
+                
         biblioteca[livro][1] = categoria
         print('✅ Alterado com sucesso!')
         time.sleep(1)
@@ -135,6 +141,7 @@ def editar():
         listar_livros()
         livro_indice = int(input("Digite o número do livro que deseja editar: "))
         livro = selecionar_livro(livro_indice)
+        print(f'Valor atual do livro: R${biblioteca[livro][2]}')
         valor = float(input("Digite o novo valor do livro: "))
         biblioteca[livro][2] = valor
         print('✅ Alterado com sucesso!')
@@ -147,6 +154,7 @@ def editar():
         listar_livros()
         livro_indice = int(input("Digite o número do livro que deseja editar: "))
         livro = selecionar_livro(livro_indice)
+        print(f'Nota atual do livro: {biblioteca[livro][3]}')
         nota = float(input("Digite a nova nota do livro: "))
         if nota >= 0 and nota <= 5:
             biblioteca[livro][3] = (emojiNota(nota)) 
@@ -158,6 +166,7 @@ def editar():
     
     elif opcao == 6:
         menu()
+
 
 def visualizar_livros():
     os.system('cls')
@@ -229,7 +238,6 @@ def visualizar_livros():
         if opcao2 == 1:
             visualizar_livros() 
     elif opcao == 4:
-
         menu()
 
 def visualizar_livro(livro):
@@ -326,4 +334,3 @@ name = input('Digite o seu nome: ')
 acao = 0
 while acao != 5:
     acao = menu()
-
