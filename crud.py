@@ -16,8 +16,8 @@ def adicionar():
         autor = input("Digite o nome do autor: ")
         genero = input(f"Aqui estão os gêneros atuais dos seus livros: {categorias}\nDigite o(s) gênero(s) do seu livro separados por espaços: ")
         generoLista = genero.split()
-        dinheiro = input("Digite o preço: ")
-        nota = int(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não leu): "))
+        dinheiro = float(input("Digite o preço: "))
+        nota = float(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não leu): "))
 
         biblioteca[nome] = []
         biblioteca[nome].append(autor)
