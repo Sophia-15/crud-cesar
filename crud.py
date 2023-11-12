@@ -141,27 +141,27 @@ def menu():
 
 def emojiNota(nota):
     if nota == 0:
-        return f'{nota} 🌚🌚🌚🌚🌚'
+        return f'🌚🌚🌚🌚🌚'
     elif 1 > nota > 0:
-        return f'{nota} 🌗🌚🌚🌚🌚'
+        return f'🌗🌚🌚🌚🌚'
     elif nota == 1:
-        return f'{nota} 🌕🌚🌚🌚🌚'
+        return f'🌕🌚🌚🌚🌚'
     elif 2 > nota >= 1.5:
-        return f'{nota} 🌕🌗🌚🌚🌚'
+        return f'🌕🌗🌚🌚🌚'
     elif nota == 2:
-        return f'{nota} 🌕🌕🌚🌚🌚'
+        return f'🌕🌕🌚🌚🌚'
     elif 3 > nota >= 2.5:
-        return f'{nota} 🌕🌕🌗🌚🌚'
+        return f'🌕🌕🌗🌚🌚'
     elif nota == 3:
-        return f'{nota} 🌕🌕🌕🌚🌚'
+        return f'🌕🌕🌕🌚🌚'
     elif 4 > nota >= 3.5:
-        return f'{nota} 🌕🌕🌕🌗🌚'
+        return f'🌕🌕🌕🌗🌚'
     elif nota == 4:
-        return f'{nota} 🌕🌕🌕🌕🌚'
+        return f'🌕🌕🌕🌕🌚'
     elif 5 > nota >= 4.5:
-        return f'{nota} 🌕🌕🌕🌕🌗'
+        return f'🌕🌕🌕🌕🌗'
     elif nota == 5:
-        return f'{nota} 🌕🌕🌕🌕🌕'
+        return f'🌕🌕🌕🌕🌕'
 
 os.system('cls')
 name = input('Digite o seu nome: ')
