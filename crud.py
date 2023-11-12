@@ -6,10 +6,10 @@ categorias = []
 gastosvalores = []
 
 def adicionar():
-    os.system('clear')
+    os.system('cls')
     opcao = int(input(f"📖 Você está cadastrando um novo livro\n[1] Continuar\n[2] Voltar\nDigite o número correspondente: "))
     if opcao == 1:
-        os.system('clear')
+        os.system('cls')
         print('📖 Você está cadastrando um novo livro')
         
         nome = input("Digite o nome do livro que você deseja adicionar: ")
@@ -38,11 +38,11 @@ def adicionar():
         menu()
 
 def editar():
-    os.system('clear')
+    os.system('cls')
     opcao = int(input(f"✏️  Você está na Área de Edição\n[1] Alterar nome\n[2] Alterar autor\n[3] Alterar categoria\n[4] Alterar valor\n[5] Voltar\nDigite o número correspondente: "))
 
     if opcao == 1:
-        os.system('clear')
+        os.system('cls')
         print('✏️  Você está na Área de Edição')
         listar_livros()
         livro = input('Digite o nome do livro: ')
@@ -53,7 +53,7 @@ def editar():
         editar()
 
     elif opcao == 2:
-        os.system('clear')
+        os.system('cls')
         print('✏️  Você está na Área de Edição')
         listar_livros()
         livro = input('Digite o nome do livro: ')
@@ -64,7 +64,7 @@ def editar():
         editar()
 
     elif opcao == 3:
-        os.system('clear')
+        os.system('cls')
         print('✏️  Você está na Área de Edição')
         listar_livros()
         livro = input('Digite o nome do livro: ')
@@ -75,7 +75,7 @@ def editar():
         editar()
 
     elif opcao == 4: 
-        os.system('clear')
+        os.system('cls')
         print('✏️  Você está na Área de Edição')
         listar_livros()
         livro = input('Digite o nome do livro: ')
@@ -97,14 +97,15 @@ def listar_livros():
         print(f" {i + 1} - {livros[i]}")
 
 def visualizar_livros():
-    os.system('clear')
+    os.system('cls')
     opcao = int(input('👓 Você está na área de visualização\n[1] Continuar\n[2] Voltar\nDigite o número correspondente: '))
 
     if opcao == 1:
-        os.system('clear')
+        os.system('cls')
+        print('👓 Você está na área de visualização')
         listar_livros()
-        livro = input("👓 Você está na área de visualização \nDigite o nome do livro que deseja visualizar: ")
-        os.system('clear')
+        livro = input("Digite o nome do livro que deseja visualizar: ")
+        os.system('cls')
         print('👓 Você está na área de visualização')
         visualizar_livro(livro)
         print("")
@@ -120,10 +121,10 @@ def visualizar_livro(livro):
     print(f"Nome: {livro} \nAutor: {livro_encontrado[0]} \nCategorias: {livro_encontrado[1]} \nPreço: R${livro_encontrado[2]:.2f} \nNota: {livro_encontrado[3]}")
 
 def excluir():
-    os.system('clear')
+    os.system('cls')
     opcao = int(input('🗑️  Você está excluindo um livro\n[1] Continuar\n[2] Voltar\nDigite o número correspondente: '))
     if opcao == 1:
-        os.system('clear')
+        os.system('cls')
         print('🗑️ Você está excluindo um livro')
         listar_livros()
         
@@ -142,12 +143,12 @@ def filtrar_categoria(categoria):
             print(livro[1])
 
 def menu():
-    os.system('clear')
+    os.system('cls')
     print(f"📚 Olá {name}! Bem-vinda ao Sistema de Gerenciamento de Leitura (SGL)")
     acao = int(input("[1] Visualizar a sua lista de livros\n[2] Adicionar um novo livro\n[3] Editar as informações de um livro\n[4] Excluir um livro\n[5] Sair\nDigite o número correspondente: "))
     
     if acao == 1:
-        os.system('clear')
+        os.system('cls')
         visualizar_livros()
     elif acao == 2:
         adicionar()
@@ -184,7 +185,7 @@ def emojiNota(nota):
     elif nota == 5:
         return f'🌕🌕🌕🌕🌕'
 
-os.system('clear')
+os.system('cls')
 name = input('Digite o seu nome: ')
 
 while True:
