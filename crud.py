@@ -96,8 +96,7 @@ def visualizar_livros():
     print(livros)
 
 def visualizar_livro(livro):
-    livro = biblioteca.get(livro, 'Livro não encontrado')
-    print(livro)
+    print(biblioteca.get(livro, 'Livro não encontrado'))
 
 def excluir():
     os.system('cls')
