@@ -46,12 +46,15 @@ def adicionar():
 
 def editar():
     os.system('cls')
-    opcao = int(input(f"✏️  Você está na Área de Edição\n[1] Alterar nome\n[2] Alterar autor\n[3] Alterar categoria\n[4] Alterar valor\n[5] Voltar\nDigite o número correspondente: "))
+    opcao = int(input(f"✏️  Você está na Área de Edição\n[1] Alterar nome\n[2] Alterar autor\n[3] Alterar categoria\n[4] Alterar valor\n[5] Alterar nota\n[6] Voltar\nDigite o número correspondente: "))
+
+    cont = 0
 
     if opcao == 1:
         os.system('cls')
         print('✏️  Você está na Área de Edição')
-        listar_livros()
+        print(biblioteca)
+        visualizar_livros()
         livro = input('Digite o nome do livro: ')
         novo_nome = input('Digite o novo nome do livro: ')
         biblioteca[novo_nome] = biblioteca.pop(livro, "Valor não encontrado")
@@ -62,7 +65,7 @@ def editar():
     elif opcao == 2:
         os.system('cls')
         print('✏️  Você está na Área de Edição')
-        listar_livros()
+        visualizar_livros()
         livro = input('Digite o nome do livro: ')
         autor = input("Digite o novo autor do livro: ")
         biblioteca[livro][0] = autor
@@ -73,9 +76,19 @@ def editar():
     elif opcao == 3:
         os.system('cls')
         print('✏️  Você está na Área de Edição')
-        listar_livros()
+        visualizar_livros()
         livro = input('Digite o nome do livro: ')
-        categoria = input("Digite a nova categoria do livro:  ")
+        os.system('cls')
+        print('✏️  Você está na Área de Edição')
+        print("Todas as categorias: ", end = ' ')
+        for cate in categorias:
+            cont+=1
+            if cont == len(categorias):
+                print(cate)
+            else:
+                 print(cate, end = ', ')  
+        print("Categorias atuais do livro : ",biblioteca[livro][1])
+        categoria = input("Digite as categorias atualizadas do livro:  ")
         biblioteca[livro][1] = categoria
         print('✅ Alterado com sucesso!')
         time.sleep(1)
@@ -84,7 +97,7 @@ def editar():
     elif opcao == 4: 
         os.system('cls')
         print('✏️  Você está na Área de Edição')
-        listar_livros()
+        visualizar_livros()
         livro = input('Digite o nome do livro: ')
         valor = float(input("Digite o novo valor do livro: "))
         biblioteca[livro][2] = valor
@@ -92,7 +105,21 @@ def editar():
         time.sleep(1)
         editar()
 
-    elif opcao == 5:
+    elif opcao == 5: 
+        os.system('cls')
+        print('✏️  Você está na Área de Edição')
+        visualizar_livros()
+        livro = input('Digite o nome do livro: ')
+        nota = int(input("Digite a nova nota do livro: "))
+        if nota >= 0 and nota <= 5:
+           biblioteca[livro][3] = (emojiNota(nota)) 
+        elif nota == 6:
+            biblioteca[livro][3] = ("Não avaliado")
+        print('✅ Alterado com sucesso!')
+        time.sleep(1)
+        editar()
+    
+    elif opcao == 6:
         menu()
 
 def listar_livros():
