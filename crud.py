@@ -98,7 +98,11 @@ def editar():
         else:
             strCategorias = livro_encontrado[1] 
         print(f'Categorias atuais: {strCategorias}')
-        categoria = input("Digite as categorias atualizadas do livro:  ")
+        categoria = input("Digite as categorias atualizadas do livro:  ").title()
+        categoriaLista = categoria.split()
+        for j in range(len(categoriaLista)):
+            if not categoriaLista[j] in categorias:
+                categorias.append(categoriaLista[j])
         biblioteca[livro][1] = categoria
         print('✅ Alterado com sucesso!')
         time.sleep(1)
