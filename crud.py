@@ -148,7 +148,17 @@ def visualizar_livros():
 
 def visualizar_livro(livro):
     livro_encontrado = biblioteca.get(livro, 'Livro não encontrado')
-    print(f"Nome: {livro} \nAutor: {livro_encontrado[0]} \nCategorias: {livro_encontrado[1]} \nPreço: R${float(livro_encontrado[2]):.2f} \nNota: {livro_encontrado[3]}")
+    strCategorias = ''
+    contVirgula = 1
+    for i in livro_encontrado[1]:
+        if contVirgula == len(livro_encontrado[1]):
+            strCategorias += (f'{i}')
+        else:
+            strCategorias += (f'{i}, ')
+            contVirgula+=1
+       
+    print(f"Nome: {livro} \nAutor: {livro_encontrado[0]} \nCategorias: {strCategorias} \nPreço: R${float(livro_encontrado[2]):.2f} \nNota: {(livro_encontrado[3])}")
+
 
 def excluir():
     os.system('cls')
