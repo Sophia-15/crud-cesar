@@ -2,34 +2,41 @@ import os
 import time
 
 biblioteca = {}
-categorias = []
+categorias = ['Ação', 'Fantasia', 'Mistério', 'Suspense', 'Ficção Científica', 'Romance', 'Comédia', 'Mangá', 'HQ', 'Terror']
 gastosvalores = []
 
 def adicionar():
-    os.system('clear')
+    os.system('cls')
     opcao = int(input(f"📖 Você está cadastrando um novo livro\n[1] Continuar\n[2] Voltar\nDigite o número correspondente: "))
     if opcao == 1:
-        os.system('clear')
+        os.system('cls')
         print('📖 Você está cadastrando um novo livro')
-        
+
         nome = input("Digite o nome do livro que você deseja adicionar: ")
         autor = input("Digite o nome do autor: ")
-        genero = input("Digite o genero: ")
+        genero = input(f"Todas as categorias: {categorias}\nDigite o(s) gênero(s) do seu livro separados por espaços: ")
+        generoLista = genero.split()
         dinheiro = float(input("Digite o preço: "))
         nota = float(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não leu): "))
 
         biblioteca[nome] = []
         biblioteca[nome].append(autor)
-        biblioteca[nome].append(genero)
+
+        for i in range(len(generoLista)):
+            biblioteca[nome].append(generoLista[i])
         biblioteca[nome].append(dinheiro)
-        
+
         if nota >= 0 and nota <= 5:
             biblioteca[nome].append(emojiNota(nota))
         elif nota == 6:
             biblioteca[nome].append("Não avaliado")
         
-        categorias.append(genero)
+        if not genero in categorias:
+            for j in range(len(generoLista)):            
+                categorias.append(generoLista[j])
         gastosvalores.append(dinheiro)
+
+        print(biblioteca)
         
         print('✅ Livro cadastrado com sucesso!')
         time.sleep(1)
@@ -38,11 +45,11 @@ def adicionar():
         menu()
 
 def editar():
-    os.system('clear')
+    os.system('cls')
     opcao = int(input(f"✏️  Você está na Área de Edição\n[1] Alterar nome\n[2] Alterar autor\n[3] Alterar categoria\n[4] Alterar valor\n[5] Voltar\nDigite o número correspondente: "))
 
     if opcao == 1:
-        os.system('clear')
+        os.system('cls')
         print('✏️  Você está na Área de Edição')
         listar_livros()
         livro = input('Digite o nome do livro: ')
@@ -53,7 +60,7 @@ def editar():
         editar()
 
     elif opcao == 2:
-        os.system('clear')
+        os.system('cls')
         print('✏️  Você está na Área de Edição')
         listar_livros()
         livro = input('Digite o nome do livro: ')
@@ -64,7 +71,7 @@ def editar():
         editar()
 
     elif opcao == 3:
-        os.system('clear')
+        os.system('cls')
         print('✏️  Você está na Área de Edição')
         listar_livros()
         livro = input('Digite o nome do livro: ')
@@ -75,7 +82,7 @@ def editar():
         editar()
 
     elif opcao == 4: 
-        os.system('clear')
+        os.system('cls')
         print('✏️  Você está na Área de Edição')
         listar_livros()
         livro = input('Digite o nome do livro: ')
@@ -97,23 +104,34 @@ def listar_livros():
         print(f" {i + 1} - {livros[i]}")
 
 def visualizar_livros():
-    os.system('clear')
-    listar_livros()
+    os.system('cls')
+    opcao = int(input('👓 Você está na área de visualização\n[1] Continuar\n[2] Voltar\nDigite o número correspondente: '))
 
-    livro = input("👓 Você está na área de visualização \nDigite o nome do livro que deseja visualizar: ")
-    os.system('clear')
-    visualizar_livro(livro)
-    time.sleep(5)
+    if opcao == 1:
+        os.system('cls')
+        print('👓 Você está na área de visualização')
+        listar_livros()
+        livro = input("Digite o nome do livro que deseja visualizar: ")
+        os.system('cls')
+        print('👓 Você está na área de visualização')
+        visualizar_livro(livro)
+        print("")
+        opcao = int(input('Digite [1] para voltar: '))
+
+        if opcao == 1:
+            visualizar_livros()
+    elif opcao == 2:
+        menu()
 
 def visualizar_livro(livro):
     livro_encontrado = biblioteca.get(livro, 'Livro não encontrado')
-    print(f"Nome: {livro} \nAutor: {livro_encontrado[0]} \nCategoria: {livro_encontrado[1]} \nPreço: R${livro_encontrado[2]} \nNota: {livro_encontrado[3]}")
+    print(f"Nome: {livro} \nAutor: {livro_encontrado[0]} \nCategorias: {livro_encontrado[1]} \nPreço: R${float(livro_encontrado[2]):.2f} \nNota: {float(livro_encontrado[3]):.2f}")
 
 def excluir():
-    os.system('clear')
+    os.system('cls')
     opcao = int(input('🗑️  Você está excluindo um livro\n[1] Continuar\n[2] Voltar\nDigite o número correspondente: '))
     if opcao == 1:
-        os.system('clear')
+        os.system('cls')
         print('🗑️ Você está excluindo um livro')
         listar_livros()
         
@@ -132,11 +150,12 @@ def filtrar_categoria(categoria):
             print(livro[1])
 
 def menu():
-    os.system('clear')
-    print(f"📚 Olá Nathália! Bem-vinda ao Sistema de Gerenciamento de Leitura (SGL)")
+    os.system('cls')
+    print(f"📚 Olá {name}! Bem-vinda ao Sistema de Gerenciamento de Leitura (SGL)")
     acao = int(input("[1] Visualizar a sua lista de livros\n[2] Adicionar um novo livro\n[3] Editar as informações de um livro\n[4] Excluir um livro\n[5] Sair\nDigite o número correspondente: "))
     
     if acao == 1:
+        os.system('cls')
         visualizar_livros()
     elif acao == 2:
         adicionar()
@@ -151,27 +170,30 @@ def menu():
 
 def emojiNota(nota):
     if nota == 0:
-        return f'{nota} 🌚🌚🌚🌚🌚'
+        return f'🌚🌚🌚🌚🌚'
     elif 1 > nota > 0:
-        return f'{nota} 🌗🌚🌚🌚🌚'
+        return f'🌗🌚🌚🌚🌚'
     elif nota == 1:
-        return f'{nota} 🌕🌚🌚🌚🌚'
+        return f'🌕🌚🌚🌚🌚'
     elif 2 > nota >= 1.5:
-        return f'{nota} 🌕🌗🌚🌚🌚'
+        return f'🌕🌗🌚🌚🌚'
     elif nota == 2:
-        return f'{nota} 🌕🌕🌚🌚🌚'
+        return f'🌕🌕🌚🌚🌚'
     elif 3 > nota >= 2.5:
-        return f'{nota} 🌕🌕🌗🌚🌚'
+        return f'🌕🌕🌗🌚🌚'
     elif nota == 3:
-        return f'{nota} 🌕🌕🌕🌚🌚'
+        return f'🌕🌕🌕🌚🌚'
     elif 4 > nota >= 3.5:
-        return f'{nota} 🌕🌕🌕🌗🌚'
+        return f'🌕🌕🌕🌗🌚'
     elif nota == 4:
-        return f'{nota} 🌕🌕🌕🌕🌚'
+        return f'🌕🌕🌕🌕🌚'
     elif 5 > nota >= 4.5:
-        return f'{nota} 🌕🌕🌕🌕🌗'
+        return f'🌕🌕🌕🌕🌗'
     elif nota == 5:
-        return f'{nota} 🌕🌕🌕🌕🌕'
+        return f'🌕🌕🌕🌕🌕'
+
+os.system('cls')
+name = input('Digite o seu nome: ')
 
 while True:
     programa = menu()
