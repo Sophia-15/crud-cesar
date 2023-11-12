@@ -10,10 +10,10 @@ def listar_categorias():
         print(f"{i + 1} - {categorias[i]}")
 
 def adicionar():
-    os.system('cls')
+    os.system('clear')
     opcao = int(input(f"📖 Você está cadastrando um novo livro\n[1] Continuar\n[2] Voltar\nDigite o número correspondente: "))
     if opcao == 1:
-        os.system('cls')
+        os.system('clear')
         print('📖 Você está cadastrando um novo livro')
 
         nome = input("Digite o nome do livro que você deseja adicionar: ")
@@ -47,15 +47,16 @@ def adicionar():
         menu()
 
 def editar():
-    os.system('cls')
+    os.system('clear')
     opcao = int(input(f"✏️  Você está na Área de Edição\n[1] Alterar nome\n[2] Alterar autor\n[3] Alterar categoria\n[4] Alterar valor\n[5] Alterar nota\n[6] Voltar\nDigite o número correspondente: "))
 
     cont = 0
     if opcao == 1:
-        os.system('cls')
+        os.system('clear')
         print('✏️  Você está na Área de Edição')
         listar_livros()
-        livro = input('Digite o nome do livro: ')
+        livro_indice = int(input("Digite o número do livro que deseja editar: "))
+        livro = selecionar_livro(livro_indice)
         novo_nome = input('Digite o novo nome do livro: ')
         biblioteca[novo_nome] = biblioteca.pop(livro, "Valor não encontrado")
         print('✅ Alterado com sucesso!')
@@ -63,10 +64,11 @@ def editar():
         editar()
 
     elif opcao == 2:
-        os.system('cls')
+        os.system('clear')
         print('✏️  Você está na Área de Edição')
         listar_livros()
-        livro = input('Digite o nome do livro: ')
+        livro_indice = int(input("Digite o número do livro que deseja editar: "))
+        livro = selecionar_livro(livro_indice)
         autor = input("Digite o novo autor do livro: ")
         biblioteca[livro][0] = autor
         print('✅ Alterado com sucesso!')
@@ -74,11 +76,12 @@ def editar():
         editar()
 
     elif opcao == 3:
-        os.system('cls')
+        os.system('clear')
         print('✏️  Você está na Área de Edição')
         listar_livros()
-        livro = input('Digite o nome do livro: ')
-        os.system('cls')
+        livro_indice = int(input("Digite o número do livro que deseja editar: "))
+        livro = selecionar_livro(livro_indice)
+        os.system('clear')
         print('✏️  Você está na Área de Edição')
         print("Todas as categorias: ")
         listar_categorias()
@@ -102,10 +105,11 @@ def editar():
         editar()
 
     elif opcao == 4: 
-        os.system('cls')
+        os.system('clear')
         print('✏️  Você está na Área de Edição')
         listar_livros()
-        livro = input('Digite o nome do livro: ')
+        livro_indice = int(input("Digite o número do livro que deseja editar: "))
+        livro = selecionar_livro(livro_indice)
         valor = float(input("Digite o novo valor do livro: "))
         biblioteca[livro][2] = valor
         print('✅ Alterado com sucesso!')
@@ -113,10 +117,11 @@ def editar():
         editar()
 
     elif opcao == 5: 
-        os.system('cls')
+        os.system('clear')
         print('✏️  Você está na Área de Edição')
         listar_livros()
-        livro = input('Digite o nome do livro: ')
+        livro_indice = int(input("Digite o número do livro que deseja editar: "))
+        livro = selecionar_livro(livro_indice)
         nota = float(input("Digite a nova nota do livro: "))
         if nota >= 0 and nota <= 5:
             biblioteca[livro][3] = (emojiNota(nota)) 
@@ -138,15 +143,16 @@ def listar_livros():
         print(f" {i + 1} - {livros[i]}")
 
 def visualizar_livros():
-    os.system('cls')
+    os.system('clear')
     opcao = int(input('👓 Você está na área de visualização\n[1] Visualizar livro\n[2] Visualizar gastos\n[3] Voltar\nDigite o número correspondente: '))
 
     if opcao == 1:
-        os.system('cls')
+        os.system('clear')
         print('👓 Você está na área de visualização')
         listar_livros()
-        livro = input("Digite o nome do livro que deseja visualizar: ")
-        os.system('cls')
+        livro_indice = int(input("Digite o número do livro que deseja visualizar: "))
+        livro = selecionar_livro(livro_indice)
+        os.system('clear')
         print('👓 Você está na área de visualização')
         print()
         visualizar_livro(livro)
@@ -156,7 +162,7 @@ def visualizar_livros():
         if opcao2 == 1:
             visualizar_livros()
     elif opcao == 2:
-        os.system('cls')
+        os.system('clear')
         print('👓 Você está na área de visualização')
         print()
         print(f'Gasto total: R${sum(gastosvalores):.2f}')
@@ -199,14 +205,15 @@ def selecionar_livro(livro_selecionado):
     return livros[livro_selecionado]
 
 def excluir():
-    os.system('cls')
+    os.system('clear')
     opcao = int(input('🗑️  Você está excluindo um livro\n[1] Continuar\n[2] Voltar\nDigite o número correspondente: '))
     if opcao == 1:
-        os.system('cls')
+        os.system('clear')
         print('🗑️   Você está excluindo um livro')
         listar_livros()
         
-        livro = (input("Digite o nome do livro que deseja excluir: "))
+        livro_indice = int(input("Digite o número do livro que deseja excluir: "))
+        livro = selecionar_livro(livro_indice)
         biblioteca.pop(livro, 'Livro não encontrado')
         
         print('✅ Livro excluído com sucesso!')
@@ -221,12 +228,12 @@ def filtrar_categoria(categoria):
             print(livro[1])
 
 def menu():
-    os.system('cls')
+    os.system('clear')
     print(f"📚 Olá {name}! Bem-vinda ao Sistema de Gerenciamento de Leitura (SGL)")
     acao = int(input("[1] Visualizar a sua lista de livros\n[2] Adicionar um novo livro\n[3] Editar as informações de um livro\n[4] Excluir um livro\n[5] Sair\nDigite o número correspondente: "))
     
     if acao == 1:
-        os.system('cls')
+        os.system('clear')
         visualizar_livros()
     elif acao == 2:
         adicionar()
@@ -263,7 +270,7 @@ def emojiNota(nota):
     elif nota == 5:
         return f'🌕🌕🌕🌕🌕'
 
-os.system('cls')
+os.system('clear')
 name = input('Digite o seu nome: ')
 
 while True:
