@@ -96,7 +96,8 @@ def visualizar_livros():
     print(livros)
 
 def visualizar_livro(livro):
-    print(biblioteca.get(livro, 'Livro não encontrado'))
+    livro = biblioteca.get(livro, 'Livro não encontrado')
+    print(livro)
 
 def excluir():
     os.system('cls')
@@ -122,7 +123,7 @@ def filtrar_categoria(categoria):
 
 def menu():
     os.system('cls')
-    print(f"📚 Olá Nathália! Bem-vinda ao Sistema de Gerenciamento de Leitura (SGL)")
+    print(f"📚 Olá {name}! Bem-vinda ao Sistema de Gerenciamento de Leitura (SGL)")
     acao = int(input("[1] Visualizar a sua lista de livros\n[2] Adicionar um novo livro\n[3] Editar as informações de um livro\n[4] Excluir um livro\n[5] Sair\nDigite o número correspondente: "))
     
     if acao == 1:
@@ -161,6 +162,9 @@ def emojiNota(nota):
         return f'{nota} 🌕🌕🌕🌕🌗'
     elif nota == 5:
         return f'{nota} 🌕🌕🌕🌕🌕'
+
+os.system('cls')
+name = input('Digite o seu nome: ')
 
 while True:
     programa = menu()
