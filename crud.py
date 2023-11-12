@@ -14,24 +14,23 @@ def adicionar():
 
         nome = input("Digite o nome do livro que você deseja adicionar: ")
         autor = input("Digite o nome do autor: ")
-        genero = input(f"Aqui estão os gêneros atuais dos seus livros: {categorias}\nDigite o(s) gênero(s) do seu livro separados por espaços: ")
+        genero = input(f"Todas as categorias: {categorias}\nDigite o(s) gênero(s) do seu livro separados por espaços: ")
         generoLista = genero.split()
-        dinheiro = input("Digite o preço: ")
-        nota = int(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não leu): "))
+        dinheiro = float(input("Digite o preço: "))
+        nota = float(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não leu): "))
 
         biblioteca[nome] = []
         biblioteca[nome].append(autor)
-        for i in range(len(generoLista)):
-            biblioteca[nome].append(generoLista[i])
+        biblioteca[nome].append(generoLista)
         biblioteca[nome].append(dinheiro)
 
         if nota >= 0 and nota <= 5:
-            biblioteca[nome].append(nota)
+            biblioteca[nome].append(emojiNota(nota))
         elif nota == 6:
             biblioteca[nome].append("Não avaliado")
         
-        if not genero in categorias:
-            for j in range(len(generoLista)):            
+        for j in range(len(generoLista)): 
+            if not generoLista[j] in categorias:           
                 categorias.append(generoLista[j])
         gastosvalores.append(dinheiro)
 
@@ -50,8 +49,7 @@ def editar():
     if opcao == 1:
         os.system('cls')
         print('✏️  Você está na Área de Edição')
-        print(biblioteca)
-        visualizar_livros()
+        listar_livros()
         livro = input('Digite o nome do livro: ')
         novo_nome = input('Digite o novo nome do livro: ')
         biblioteca[novo_nome] = biblioteca.pop(livro, "Valor não encontrado")
@@ -62,7 +60,7 @@ def editar():
     elif opcao == 2:
         os.system('cls')
         print('✏️  Você está na Área de Edição')
-        visualizar_livros()
+        listar_livros()
         livro = input('Digite o nome do livro: ')
         autor = input("Digite o novo autor do livro: ")
         biblioteca[livro][0] = autor
@@ -73,7 +71,7 @@ def editar():
     elif opcao == 3:
         os.system('cls')
         print('✏️  Você está na Área de Edição')
-        visualizar_livros()
+        listar_livros()
         livro = input('Digite o nome do livro: ')
         categoria = input("Digite a nova categoria do livro:  ")
         biblioteca[livro][1] = categoria
@@ -84,7 +82,7 @@ def editar():
     elif opcao == 4: 
         os.system('cls')
         print('✏️  Você está na Área de Edição')
-        visualizar_livros()
+        listar_livros()
         livro = input('Digite o nome do livro: ')
         valor = float(input("Digite o novo valor do livro: "))
         biblioteca[livro][2] = valor
@@ -95,15 +93,46 @@ def editar():
     elif opcao == 5:
         menu()
 
-def visualizar_livros():
+def listar_livros():
     livros = []
     for i in biblioteca.keys():
         livros.append(i)
-    print(livros)
+
+    for i in range(len(livros)):
+        print(f" {i + 1} - {livros[i]}")
+
+def visualizar_livros():
+    os.system('cls')
+    opcao = int(input('👓 Você está na área de visualização\n[1] Continuar\n[2] Voltar\nDigite o número correspondente: '))
+
+    if opcao == 1:
+        os.system('cls')
+        print('👓 Você está na área de visualização')
+        listar_livros()
+        livro = input("Digite o nome do livro que deseja visualizar: ")
+        os.system('cls')
+        print('👓 Você está na área de visualização')
+        visualizar_livro(livro)
+        print("")
+        opcao = int(input('Digite [1] para voltar: '))
+
+        if opcao == 1:
+            visualizar_livros()
+    elif opcao == 2:
+        menu()
 
 def visualizar_livro(livro):
-    livro = biblioteca.get(livro, 'Livro não encontrado')
-    print(livro)
+    livro_encontrado = biblioteca.get(livro, 'Livro não encontrado')
+    strCategorias = ''
+    contVirgula = 1
+    for i in livro_encontrado[1]:
+        if contVirgula == len(livro_encontrado[1]):
+            strCategorias += (f'{i}')
+        else:
+            strCategorias += (f'{i}, ')
+            contVirgula+=1
+       
+    print(f"Nome: {livro} \nAutor: {livro_encontrado[0]} \nCategorias: {strCategorias} \nPreço: R${float(livro_encontrado[2]):.2f} \nNota: {(livro_encontrado[3])}")
 
 def excluir():
     os.system('cls')
@@ -111,7 +140,7 @@ def excluir():
     if opcao == 1:
         os.system('cls')
         print('🗑️ Você está excluindo um livro')
-        visualizar_livros()
+        listar_livros()
         
         livro = (input("Digite o nome do livro que deseja excluir: "))
         biblioteca.pop(livro, 'Livro não encontrado')
@@ -133,6 +162,7 @@ def menu():
     acao = int(input("[1] Visualizar a sua lista de livros\n[2] Adicionar um novo livro\n[3] Editar as informações de um livro\n[4] Excluir um livro\n[5] Sair\nDigite o número correspondente: "))
     
     if acao == 1:
+        os.system('cls')
         visualizar_livros()
     elif acao == 2:
         adicionar()
