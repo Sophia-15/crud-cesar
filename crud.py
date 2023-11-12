@@ -5,9 +5,33 @@ biblioteca = {}
 categorias = ['Ação', 'Fantasia', 'Mistério', 'Suspense', 'Ficção Científica', 'Romance', 'Comédia', 'Mangá', 'HQ', 'Terror']
 gastosvalores = []
 
+
+def selecionar_livro(livro_selecionado):
+    livros = []
+    livro_selecionado -= 1
+
+    for livro in biblioteca.keys():
+        livros.append(livro)
+    
+    return livros[livro_selecionado]
+
+def selecionar_categoria(categoria_selecionada):
+    categoria_selecionada -= 1
+
+    return categorias[categoria_selecionada]
+
+    
+def listar_livros():
+    livros = []
+    for i in biblioteca.keys():
+        livros.append(i)
+
+    for i in range(len(livros)):
+        print(f"{i + 1}. {livros[i]}")
+
 def listar_categorias():
     for i in range(len(categorias)):
-        print(f"{i + 1} - {categorias[i]}")
+        print(f"{i + 1}. {categorias[i]}")
 
 def adicionar():
     os.system('cls')
@@ -37,7 +61,9 @@ def adicionar():
         
         for j in range(len(generoLista)):         
             if not generoLista[j] in categorias:
-                categorias.append(generoLista[j])
+                if generoLista[j] != 'Hq':
+                    categorias.append(generoLista[j])
+
         gastosvalores.append(dinheiro)
 
         print('✅ Livro cadastrado com sucesso!')
@@ -103,6 +129,7 @@ def editar():
         for j in range(len(categoriaLista)):
             if not categoriaLista[j] in categorias:
                 categorias.append(categoriaLista[j])
+                
         biblioteca[livro][1] = categoria
         print('✅ Alterado com sucesso!')
         time.sleep(1)
@@ -140,17 +167,10 @@ def editar():
     elif opcao == 6:
         menu()
 
-def listar_livros():
-    livros = []
-    for i in biblioteca.keys():
-        livros.append(i)
-
-    for i in range(len(livros)):
-        print(f" {i + 1} - {livros[i]}")
 
 def visualizar_livros():
     os.system('cls')
-    opcao = int(input('👓 Você está na área de visualização\n[1] Visualizar livros\n[2] Visualizar gastos\n[3] Voltar\nDigite o número correspondente: '))
+    opcao = int(input('👓 Você está na área de visualização\n[1] Visualizar livros\n[2] Visualizar por categoria\n[3] Visualizar gastos\n[4] Voltar\nDigite o número correspondente: '))
 
     if opcao == 1:
         os.system('cls')
@@ -169,6 +189,41 @@ def visualizar_livros():
             visualizar_livros()
     elif opcao == 2:
         os.system('cls')
+        print('👓 Você está na área de visualização por categoria')
+        print()
+        listar_categorias()
+        print()
+        categoria_indice = int(input("Digite o número da categoria que você deseja filtrar por: "))
+        categoria = selecionar_categoria(categoria_indice)
+        os.system('cls')
+        print(f'👓 Você está visualizando a categoria: {categoria}')
+        print()
+        filtrar_categoria(categoria)
+        print()
+        opcao2 = int(input('[1] Visualizar livro \n[2] Voltar\nDigite o número correspondente: '))
+
+        if opcao2 == 1:
+            os.system('cls')
+            print(f'👓 Você está visualizando a categoria: {categoria}')
+            print()
+            filtrar_categoria(categoria)
+            print()
+            livro_indice = int(input("Digite o número do livro que deseja visualizar: "))
+            livro = selecionar_livro(livro_indice)
+            os.system('cls')
+            print('👓 Você está na área de visualização')
+            print()
+            visualizar_livro(livro)
+            print()
+            opcao2 = int(input('Digite [1] para voltar: '))
+
+            if opcao2 == 1:
+                visualizar_livros()
+
+        if opcao2 == 2:
+            visualizar_livros()
+    elif opcao == 3:
+        os.system('cls')
         print('👓 Você está na área de visualização')
         print()
         print(f'Gasto total: R${sum(gastosvalores):.2f}')
@@ -181,8 +236,8 @@ def visualizar_livros():
         print()
         opcao2 = int(input('Digite [1] para voltar: '))
         if opcao2 == 1:
-            visualizar_livros()
-    elif opcao == 3:
+            visualizar_livros() 
+    elif opcao == 4:
         menu()
 
 def visualizar_livro(livro):
@@ -201,14 +256,6 @@ def visualizar_livro(livro):
 
     print(f"Nome: {livro} \nAutor: {livro_encontrado[0]} \nCategorias: {strCategorias} \nPreço: R${float(livro_encontrado[2]):.2f} \nNota: {(livro_encontrado[3])}")
 
-def selecionar_livro(livro_selecionado):
-    livros = []
-    livro_selecionado -= 1
-
-    for livro in biblioteca.keys():
-        livros.append(livro)
-    
-    return livros[livro_selecionado]
 
 def excluir():
     os.system('cls')
@@ -228,10 +275,16 @@ def excluir():
     elif opcao == 2:
         menu()
 
-def filtrar_categoria(categoria):
+def filtrar_categoria(categoria):    
+    livros = []
     for livro in biblioteca.items():
-        if categoria in livro[1]:
-            print(livro[1])
+        if categoria in livro[1][1]:
+            livros.append(livro[0])
+
+    for i in range(len(livros)):
+        print(f"{i + 1}. {livros[i]}")
+
+    return livros
 
 def menu():
     os.system('cls')
