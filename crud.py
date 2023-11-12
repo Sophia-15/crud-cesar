@@ -62,6 +62,7 @@ def adicionar():
             if not generoLista[j] in categorias:
                 if generoLista[j] != 'Hq':
                     categorias.append(generoLista[j])
+
         gastosvalores.append(dinheiro)
 
         print('✅ Livro cadastrado com sucesso!')
@@ -228,6 +229,7 @@ def visualizar_livros():
         if opcao2 == 1:
             visualizar_livros() 
     elif opcao == 4:
+
         menu()
 
 def visualizar_livro(livro):
@@ -245,7 +247,6 @@ def visualizar_livro(livro):
         strCategorias = livro_encontrado[1]
 
     print(f"Nome: {livro} \nAutor: {livro_encontrado[0]} \nCategorias: {strCategorias} \nPreço: R${float(livro_encontrado[2]):.2f} \nNota: {(livro_encontrado[3])}")
-
 
 
 def excluir():
@@ -325,3 +326,4 @@ name = input('Digite o seu nome: ')
 acao = 0
 while acao != 5:
     acao = menu()
+
