@@ -15,8 +15,8 @@ def adicionar():
         nome = input("Digite o nome do livro que você deseja adicionar: ")
         autor = input("Digite o nome do autor: ")
         genero = input("Digite o genero: ")
-        dinheiro = float(input("Digite o preço: "))
-        nota = float(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não leu): "))
+        dinheiro = input("Digite o preço: ")
+        nota = int(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não leu): "))
 
         biblioteca[nome] = []
         biblioteca[nome].append(autor)
@@ -24,7 +24,7 @@ def adicionar():
         biblioteca[nome].append(dinheiro)
         
         if nota >= 0 and nota <= 5:
-            biblioteca[nome].append(emojiNota(nota))
+            biblioteca[nome].append(nota)
         elif nota == 6:
             biblioteca[nome].append("Não avaliado")
         
@@ -44,7 +44,6 @@ def editar():
     if opcao == 1:
         os.system('cls')
         print('✏️  Você está na Área de Edição')
-        print(biblioteca)
         visualizar_livros()
         livro = input('Digite o nome do livro: ')
         novo_nome = input('Digite o novo nome do livro: ')
@@ -123,7 +122,7 @@ def filtrar_categoria(categoria):
 
 def menu():
     os.system('cls')
-    print(f"📚 Olá Nathália! Bem-vinda ao Sistema de Gerenciamento de Leitura (SGL)")
+    print(f"📚 Olá {name}! Bem-vindo(a) ao Sistema de Gerenciamento de Leitura (SGL)")
     acao = int(input("[1] Visualizar a sua lista de livros\n[2] Adicionar um novo livro\n[3] Editar as informações de um livro\n[4] Excluir um livro\n[5] Sair\nDigite o número correspondente: "))
     
     if acao == 1:
@@ -141,27 +140,30 @@ def menu():
 
 def emojiNota(nota):
     if nota == 0:
-        return f'{nota} 🌚🌚🌚🌚🌚'
+        return f'{nota} | 🌚🌚🌚🌚🌚'
     elif 1 > nota > 0:
-        return f'{nota} 🌗🌚🌚🌚🌚'
+        return f'{nota} | 🌗🌚🌚🌚🌚'
     elif nota == 1:
-        return f'{nota} 🌕🌚🌚🌚🌚'
+        return f'{nota} | 🌕🌚🌚🌚🌚'
     elif 2 > nota >= 1.5:
-        return f'{nota} 🌕🌗🌚🌚🌚'
+        return f'{nota} | 🌕🌗🌚🌚🌚'
     elif nota == 2:
-        return f'{nota} 🌕🌕🌚🌚🌚'
+        return f'{nota} | 🌕🌕🌚🌚🌚'
     elif 3 > nota >= 2.5:
-        return f'{nota} 🌕🌕🌗🌚🌚'
+        return f'{nota} | 🌕🌕🌗🌚🌚'
     elif nota == 3:
-        return f'{nota} 🌕🌕🌕🌚🌚'
+        return f'{nota} | 🌕🌕🌕🌚🌚'
     elif 4 > nota >= 3.5:
-        return f'{nota} 🌕🌕🌕🌗🌚'
+        return f'{nota} | 🌕🌕🌕🌗🌚'
     elif nota == 4:
-        return f'{nota} 🌕🌕🌕🌕🌚'
+        return f'{nota} | 🌕🌕🌕🌕🌚'
     elif 5 > nota >= 4.5:
-        return f'{nota} 🌕🌕🌕🌕🌗'
+        return f'{nota} | 🌕🌕🌕🌕🌗'
     elif nota == 5:
-        return f'{nota} 🌕🌕🌕🌕🌕'
+        return f'{nota} | 🌕🌕🌕🌕🌕'
+
+os.system('cls')
+name = input('Digite o seu nome: ')
 
 while True:
     programa = menu()
