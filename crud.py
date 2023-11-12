@@ -155,7 +155,7 @@ def excluir():
     opcao = int(input('🗑️  Você está excluindo um livro\n[1] Continuar\n[2] Voltar\nDigite o número correspondente: '))
     if opcao == 1:
         os.system('cls')
-        print('🗑️   Você está excluindo um livro')
+        print('🗑️  Você está excluindo um livro')
         listar_livros()
         
         livro = (input("Digite o nome do livro que deseja excluir: "))
@@ -174,7 +174,7 @@ def filtrar_categoria(categoria):
 
 def menu():
     os.system('cls')
-    print(f"📚 Olá {name}! Bem-vinda ao Sistema de Gerenciamento de Leitura (SGL)")
+    print(f"📚 Olá {name}! Bem-vindo(a) ao Sistema de Gerenciamento de Leitura (SGL)")
     acao = int(input("[1] Visualizar a sua lista de livros\n[2] Adicionar um novo livro\n[3] Editar as informações de um livro\n[4] Excluir um livro\n[5] Sair\nDigite o número correspondente: "))
     
     if acao == 1:
