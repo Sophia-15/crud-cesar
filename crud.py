@@ -45,8 +45,8 @@ def adicionar():
         autor = input("Digite o nome do autor: ")
         print(f"Todas as categorias:")
         listar_categorias()
-        genero = input(f"Digite a(s) categoria(s) do seu livro separadas por espaços: ").title()
-        generoLista = genero.split()
+        genero = input(f"Digite a(s) categoria(s) do seu livro separadas por vírgulas e espaços: ").title()
+        generoLista = genero.split(', ')
         dinheiro = float(input("Digite o preço: "))
         nota = float(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não leu): "))
 
@@ -126,8 +126,8 @@ def editar():
         else:
             strCategorias = livro_encontrado[1] 
         print(f'Categorias atuais: {strCategorias}')
-        categoria = input("Digite as categorias atualizadas do livro: ").title()
-        categoriaLista = categoria.split()
+        categoria = input("Digite as categorias atualizadas do livrom separadas por vírgulas e espaços: ").title()
+        categoriaLista = categoria.split(', ')
         for j in range(len(categoriaLista)):
             if not categoriaLista[j] in categorias:
                 categorias.append(categoriaLista[j])
