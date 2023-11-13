@@ -126,7 +126,7 @@ def editar():
         else:
             strCategorias = livro_encontrado[1] 
         print(f'Categorias atuais: {strCategorias}')
-        categoria = input("Digite as categorias atualizadas do livrom separadas por vírgulas e espaços: ").title()
+        categoria = input("Digite as categorias atualizadas do livro separadas por vírgulas e espaços: ").title()
         categoriaLista = categoria.split(', ')
         for j in range(len(categoriaLista)):
             if not categoriaLista[j] in categorias:
