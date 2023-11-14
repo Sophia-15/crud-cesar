@@ -1,20 +1,19 @@
 import os
 import time
 
-biblioteca = {'LivroTeste':['AutorTeste', ['Ação', 'Mistério'], 15.90, 'Não lido']}
+biblioteca = {}
 categorias = ['Ação', 'Fantasia', 'Mistério', 'Suspense', 'Ficção Científica', 'Romance', 'Comédia', 'Mangá', 'HQ', 'Terror']
 gastosvalores = []
 
-def selecionar_livro(livro_selecionado, categoria = 'padrao'):
+def selecionar_livro(livro_selecionado):
     livros = []
+
     livro_selecionado -= 1
 
-    if categoria == 'padrao':
-        for livro in biblioteca.keys():
-            livros.append(livro)
-        return livros[livro_selecionado]
-    else:
-        return filtrar_categoria(categoria)
+    for livro in biblioteca.keys():
+        livros.append(livro)
+    
+    return livros[livro_selecionado]
 
 def selecionar_categoria(categoria_selecionada):
     categoria_selecionada -= 1
@@ -186,7 +185,7 @@ def visualizar_livros():
                 try:    
                     if Vazio != 'vazio':
                         livro_indice = int(input("Digite o número do livro que deseja visualizar: "))
-                        if livro_indice < len(biblioteca): #Tentei consertar aquele negocio de vc digitar um numero na categoria e pegar outro
+                        if livro_indice != 0:
                             livro = selecionar_livro(livro_indice)
                             os.system('cls')
                             print('👓 Você está na área de visualização')
@@ -197,10 +196,9 @@ def visualizar_livros():
                             if opcao2 == 1:
                                 visualizar_livros()
                                 break
-                            break
                         else:
-                            livro_indice += 'erro'
-                            break
+                            print('❌ Código inválido!')
+                            time.sleep(1)
                     else:
                         sair = int(input('Digite [1] para voltar: '))
                         if sair == 1:
