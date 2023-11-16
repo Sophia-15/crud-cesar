@@ -1,7 +1,7 @@
 import os
 import time
 
-biblioteca = {}
+biblioteca = {'Teste':['Teste', 'Ação', 15.90, 3], 'Teste2':['Teste2', 'Fantasia Ação', 32.90, 4]}
 categorias = ['Ação', 'Fantasia', 'Mistério', 'Suspense', 'Ficção Científica', 'Romance', 'Comédia', 'Mangá', 'HQ', 'Terror']
 gastosvalores = []
 
@@ -31,9 +31,7 @@ def listar_livros():
     for i in biblioteca.keys():
         livros.append(i)
     if livros == []:
-        print()
         print('Você ainda não possui livros')
-        print()
         return 'vazio'
     else:
         for i in range(len(livros)):
@@ -120,100 +118,209 @@ def adicionar():
             time.sleep(1)
 
 def editar():
-    os.system('cls')
-    opcao = int(input(f"✏️  Você está na Área de Edição\n\n[1] Alterar nome\n[2] Alterar autor\n[3] Alterar categoria\n[4] Alterar valor\n[5] Alterar nota\n[6] Voltar\n\nDigite o número correspondente: "))
+    while True:   
+        try:
+            os.system('cls')
+            opcao = int(input(f"✏️  Você está na Área de Edição\n\n[1] Alterar nome\n[2] Alterar autor\n[3] Alterar categoria\n[4] Alterar valor\n[5] Alterar nota\n[6] Voltar\n\nDigite o número correspondente: "))
 
-    cont = 0
-    if opcao == 1:
-        os.system('cls')
-        print('✏️  Você está na Área de Edição\n')
-        listar_livros()
-        livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
-        livro = selecionar_livro(livro_indice)
-        novo_nome = input('\nDigite o novo nome do livro: ')
-        biblioteca[novo_nome] = biblioteca.pop(livro, "Valor não encontrado")
-        print('✅ Alterado com sucesso!')
-        time.sleep(1)
-        editar()
+            if opcao == 1:
+                while True:        
+                    try:    
+                        os.system('cls')
+                        print('✏️  Você está na Área de Edição de nomes\n')
+                        if listar_livros() != 'vazio':
+                            livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
+                            if selecionar_livro(livro_indice) != 'vazio':
+                                os.system('cls')
+                                print('✏️  Você está na Área de Edição de nomes\n')
+                                print(f'Nome atual: {selecionar_livro(livro_indice)}')
+                                novo_nome = input('\nDigite o novo nome do livro: ')
+                                biblioteca[novo_nome] = biblioteca.pop(selecionar_livro(livro_indice), "Valor não encontrado")
+                                print('✅ Alterado com sucesso!')
+                                time.sleep(1)
+                                editar()
+                            else:
+                                print('❌ Código inválido!')
+                                time.sleep(1)
+                        else:
+                            acao2 = int(input('Digite [1] para voltar: '))
+                            if acao2 == 1:
+                                menu()
+                            else:
+                                print('❌ Código inválido!')
+                                time.sleep(1)
+                    except:
+                        print('❌ Código inválido!')
+                        time.sleep(1)
 
-    elif opcao == 2:
-        os.system('cls')
-        print('✏️  Você está na Área de Edição\n')
-        listar_livros()
-        livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
-        livro = selecionar_livro(livro_indice)
-        print(f'\nAutor atual: {biblioteca[livro][0]}')
-        autor = input("\nDigite o novo autor do livro: ")
-        biblioteca[livro][0] = autor
-        print('✅ Alterado com sucesso!')
-        time.sleep(1)
-        editar()
+            elif opcao == 2:
+                while True:        
+                    try:    
+                        os.system('cls')
+                        print('✏️  Você está na Área de Edição de autores\n')
+                        if listar_livros() != 'vazio':
+                            livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
+                            if selecionar_livro(livro_indice) != 'vazio':
+                                os.system('cls')
+                                print('✏️  Você está na Área de Edição de autores\n')
+                                print(f'Autor atual: {biblioteca[selecionar_livro(livro_indice)][0]}')
+                                autor = input("\nDigite o novo autor do livro: ")
+                                biblioteca[selecionar_livro(livro_indice)][0] = autor
+                                print('✅ Alterado com sucesso!')
+                                time.sleep(1)
+                                editar()
+                            else:
+                                print('❌ Código inválido!')
+                                time.sleep(1)
+                        else:
+                            acao2 = int(input('Digite [1] para voltar: '))
+                            if acao2 == 1:
+                                menu()
+                            else:
+                                print('❌ Código inválido!')
+                                time.sleep(1)
+                    except:
+                        print('❌ Código inválido!')
+                        time.sleep(1)
 
-    elif opcao == 3:
-        os.system('cls')
-        print('✏️  Você está na Área de Edição\n')
-        listar_livros()
-        livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
-        livro = selecionar_livro(livro_indice)
-        os.system('cls')
-        print('✏️  Você está na Área de Edição\n')
-        print("Todas as categorias: ")
-        listar_categorias()
-        livro_encontrado = biblioteca.get(livro, 'Livro não encontrado')
-        strCategorias = ''
-        contVirgula = 1
-        if type(livro_encontrado[1]) == list:
-            for i in livro_encontrado[1]:
-                if contVirgula == len(livro_encontrado[1]):
-                    strCategorias += (f'{i}')
-                else:
-                    strCategorias += (f'{i}, ')
-                    contVirgula+=1
-        else:
-            strCategorias = livro_encontrado[1] 
-        print(f'\nCategorias atuais: {strCategorias}')
-        categoria = input("\nDigite as categorias atualizadas do livro separadas por vírgulas e espaços: ").title()
-        categoriaLista = categoria.split(', ')
-        for j in range(len(categoriaLista)):
-            if not categoriaLista[j] in categorias:
-                categorias.append(categoriaLista[j])
-                
-        biblioteca[livro][1] = categoria
-        print('✅ Alterado com sucesso!')
-        time.sleep(1)
-        editar()
+            elif opcao == 3:
+                while True:
+                    try:    
+                        os.system('cls')
+                        print('✏️  Você está na Área de Edição de categorias\n')
+                        if listar_livros() != 'vazio':
+                            livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
+                            if selecionar_livro(livro_indice) != 'vazio':
+                                os.system('cls')
+                                print('✏️  Você está na Área de Edição de categorias\n')
+                                print("Todas as categorias: ")
+                                listar_categorias()
+                                livro_encontrado = biblioteca.get(selecionar_livro(livro_indice), 'Livro não encontrado')
+                                strCategorias = ''
+                                contVirgula = 1
+                                if type(livro_encontrado[1]) == list:
+                                    for i in livro_encontrado[1]:
+                                        if contVirgula == len(livro_encontrado[1]):
+                                            strCategorias += (f'{i}')
+                                        else:
+                                            strCategorias += (f'{i}, ')
+                                            contVirgula+=1
+                                else:
+                                    strCategorias = livro_encontrado[1] 
+                                print(f'\nCategorias atuais: {strCategorias}')
+                                categoria = input("\nDigite as categorias atualizadas do livro separadas por vírgulas e espaços: ").title()
+                                categoriaLista = categoria.split(', ')
+                                for j in range(len(categoriaLista)):
+                                    if not categoriaLista[j] in categorias:
+                                        categorias.append(categoriaLista[j])
+                                        
+                                biblioteca[selecionar_livro(livro_indice)][1] = categoria
+                                print('✅ Alterado com sucesso!')
+                                time.sleep(1)
+                                editar()
+                            else:
+                                print('❌ Código inválido!')
+                                time.sleep(1)
+                        else:
+                            acao2 = int(input('Digite [1] para voltar: '))
+                            if acao2 == 1:
+                                menu()
+                            else:
+                                print('❌ Código inválido!')
+                                time.sleep(1)
+                    except:
+                        print('❌ Código inválido!')
+                        time.sleep(1)
 
-    elif opcao == 4: 
-        os.system('cls')
-        print('✏️  Você está na Área de Edição\n')
-        listar_livros()
-        livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
-        livro = selecionar_livro(livro_indice)
-        print(f'\nValor atual do livro: R${biblioteca[livro][2]:.2f}')
-        valor = float(input("\nDigite o novo valor do livro: "))
-        biblioteca[livro][2] = valor
-        print('✅ Alterado com sucesso!')
-        time.sleep(1)
-        editar()
+            elif opcao == 4: 
+                while True:
+                    try:
+                        os.system('cls')
+                        print('✏️  Você está na Área de Edição de valores\n')
+                        if listar_livros() != 'vazio':
+                            livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
+                            if selecionar_livro(livro_indice) != 'vazio':
+                                while True:
+                                    try:   
+                                        os.system('cls')
+                                        print('✏️  Você está na Área de Edição de valores')
+                                        print(f'\nValor atual do livro: R${biblioteca[selecionar_livro(livro_indice)][2]:.2f}')
+                                        valor = float(input("\nDigite o novo valor do livro: "))
+                                        biblioteca[selecionar_livro(livro_indice)][2] = valor
+                                        print('✅ Alterado com sucesso!')
+                                        time.sleep(1)
+                                        editar()
+                                        break
+                                    except:
+                                        print('❌ Código inválido!')
+                                        time.sleep(1)
+                            else:
+                                print('❌ Código inválido!')
+                                time.sleep(1)
+                        else:
+                            acao2 = int(input('Digite [1] para voltar: '))
+                            if acao2 == 1:
+                                menu()
+                            else:
+                                print('❌ Código inválido!')
+                                time.sleep(1)
+                    except:
+                        print('❌ Código inválido!')
+                        time.sleep(1)
 
-    elif opcao == 5: 
-        os.system('cls')
-        print('✏️  Você está na Área de Edição\n')
-        listar_livros()
-        livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
-        livro = selecionar_livro(livro_indice)
-        print(f'\nNota atual do livro: {biblioteca[livro][3]}')
-        nota = float(input("\nDigite a nova nota do livro: "))
-        if nota >= 0 and nota <= 5:
-            biblioteca[livro][3] = (emojiNota(nota)) 
-        elif nota == 6:
-            biblioteca[livro][3] = ("Não avaliado")
-        print('✅ Alterado com sucesso!')
-        time.sleep(1)
-        editar()
-    
-    elif opcao == 6:
-        menu()
+            elif opcao == 5: 
+                while True:
+                    try:
+                        os.system('cls')
+                        print('✏️  Você está na Área de Edição\n')
+                        if listar_livros() != 'vazio':
+                            livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
+                            if selecionar_livro(livro_indice) != 'vazio':
+                                while True:
+                                    try:
+                                        os.system('cls')
+                                        print('✏️  Você está na Área de Edição\n')
+                                        print(f'Nota atual do livro: {biblioteca[selecionar_livro(livro_indice)][3]}')
+                                        nota = float(input("\nDigite a nova nota do livro: "))
+                                        if nota >= 0 and nota <= 5:
+                                            biblioteca[selecionar_livro(livro_indice)][3] = (emojiNota(nota)) 
+                                            print('✅ Alterado com sucesso!')
+                                            time.sleep(1)
+                                            editar()
+                                            break
+                                        elif nota == 6:
+                                            biblioteca[selecionar_livro(livro_indice)][3] = ("Não avaliado")
+                                            print('✅ Alterado com sucesso!')
+                                            time.sleep(1)
+                                            editar()
+                                            break
+                                        else:
+                                            print('❌ Código inválido!')
+                                            time.sleep(1)
+                                    except:
+                                        print('❌ Código inválido!')
+                                        time.sleep(1)
+                        else:
+                            acao2 = int(input('Digite [1] para voltar: '))
+                            if acao2 == 1:
+                                menu()
+                            else:
+                                print('❌ Código inválido!')
+                                time.sleep(1)
+                    except:
+                        print('❌ Código inválido!')
+                        time.sleep(1)
+            
+            elif opcao == 6:
+                menu()
+            
+            else:
+                print('❌ Código inválido!')
+                time.sleep(1)
+        
+        except:
+            print('❌ Código inválido!')
+            time.sleep(1)
 
 def visualizar_livros():
     os.system('cls')
@@ -422,7 +529,7 @@ def filtrar_categoria(categoria):
     return livros
 
 def menu():
-    arquivo = open(f'usuarios/{name}.csv', 'w')
+    arquivo = open(f'usuarios/{name}.csv', 'a')
     os.system('cls')
     print(f"📚 Olá {name}! Bem-vindo(a) ao Sistema de Gerenciamento de Leitura (SGL)")
     print()
