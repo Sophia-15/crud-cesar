@@ -1,7 +1,7 @@
 import os
 import time
 
-biblioteca = {'Teste':['Teste', 'Ação', 15.90, 3], 'Teste2':['Teste2', 'Fantasia Ação', 32.90, 4]}
+biblioteca = {}
 categorias = ['Ação', 'Fantasia', 'Mistério', 'Suspense', 'Ficção Científica', 'Romance', 'Comédia', 'Mangá', 'HQ', 'Terror']
 gastosvalores = []
 
@@ -220,7 +220,7 @@ def visualizar_livros():
         if opcao == 1:
             while True:
                 os.system('cls')
-                print('👓 Você está na área de visualização de livros\n')
+                print('👓 Você está na área de visualização de livros')
                 Vazio = listar_livros()
                 try:    
                     if Vazio != 'vazio':
@@ -263,7 +263,7 @@ def visualizar_livros():
                     while True:
                         try:    
                             os.system('cls')
-                            print(f'👓 Você está visualizando a categoria: {categoria}\n')
+                            print(f'👓 Você está visualizando a categoria: {categoria}')
                             Vazio = filtrar_categoria(categoria)
                             if Vazio != 'vazio': 
                                 opcao2 = int(input('\n[1] Visualizar livro \n[2] Voltar\n\nDigite o número correspondente: '))
@@ -419,6 +419,7 @@ def filtrar_categoria(categoria):
     return livros
 
 def menu():
+    arquivo = open(f'usuarios/{name}.csv', 'w')
     os.system('cls')
     print(f"📚 Olá {name}! Bem-vindo(a) ao Sistema de Gerenciamento de Leitura (SGL)")
     print()
