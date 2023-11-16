@@ -5,15 +5,18 @@ biblioteca = {}
 categorias = ['Ação', 'Fantasia', 'Mistério', 'Suspense', 'Ficção Científica', 'Romance', 'Comédia', 'Mangá', 'HQ', 'Terror']
 gastosvalores = []
 
-def selecionar_livro(livro_selecionado):
+def selecionar_livro(livro_selecionado, livros_categoria = []):
     livros = []
 
     livro_selecionado -= 1
 
+    if len(livros_categoria) > 0 and livro_selecionado + 1 != 0 and livro_selecionado > 0:
+        return livros_categoria[livro_selecionado]
+
     for livro in biblioteca.keys():
         livros.append(livro)
     
-    if (livro_selecionado) < len(livros) and livro_selecionado >= 0:
+    if (livro_selecionado) < len(livros) and livro_selecionado >= 0 and livro_selecionado + 1 != 0:
         return livros[livro_selecionado]
     else:
         return 'vazio'
@@ -280,14 +283,14 @@ def visualizar_livros():
                                         os.system('cls')
                                         print(f'👓 Você está visualizando a categoria: {categoria}')
                                         print()
-                                        filtrar_categoria(categoria)
+                                        livros_categoria = filtrar_categoria(categoria)
                                         print()
                                         livro_indice = int(input("Digite o número do livro que deseja visualizar: "))
-                                        livro = selecionar_livro(livro_indice, categoria)
+                                        livro = selecionar_livro(livro_indice, livros_categoria)
                                         os.system('cls')
                                         print('👓 Você está na área de visualização de livro')
                                         print()
-                                        visualizar_livro(livro[0])
+                                        visualizar_livro(livro[0] if type(livro) == list else livro)
                                         print()
                                         opcao2 = int(input('Digite [1] para voltar: '))
 
