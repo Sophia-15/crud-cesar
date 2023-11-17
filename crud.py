@@ -1,9 +1,9 @@
 import os
 import time
 
-biblioteca = {'Teste':['Teste', 'Ação', 15.90, 3], 'Teste2':['Teste2', 'Fantasia Ação', 32.90, 4]}
+biblioteca = {}
 categorias = ['Ação', 'Fantasia', 'Mistério', 'Suspense', 'Ficção Científica', 'Romance', 'Comédia', 'Mangá', 'HQ', 'Terror']
-gastosvalores = []
+gastos_valores = []
 
 def selecionar_livro(livro_selecionado, livros_categoria = []):
     livros = []
@@ -47,10 +47,17 @@ def adicionar():
             os.system('clear')
             opcao = int(input(f"📖 Você está cadastrando um novo livro\n\n[1] Continuar\n[2] Voltar\n\nDigite o número correspondente: "))
             if opcao == 1:
-                os.system('clear')
-                print('📖 Você está cadastrando um novo livro')
-                print()
-                nome = input("Digite o nome do livro que você deseja adicionar: ")
+                while True:
+                    os.system('clear')
+                    print('📖 Você está cadastrando um novo livro')
+                    print()
+                    nome = input("Digite o nome do livro que você deseja adicionar: ")
+                    
+                    if ',' in nome:
+                        print('❌ Não utilize vírgulas!')
+                        time.sleep(1.5)
+                    else:
+                        break
                 os.system('clear')
                 print('📖 Você está cadastrando um novo livro')
                 print()
@@ -89,24 +96,15 @@ def adicionar():
                 biblioteca[nome].append(generoLista)
                 biblioteca[nome].append(dinheiro)
 
-                arquivo = open(f"usuarios/{name}.csv", "a+")
-                arquivo.write(f"{nome}, {autor}, {generoLista}, {dinheiro}")
-
                 if nota >= 0 and nota <= 5:
                     biblioteca[nome].append(emojiNota(nota))
-                    arquivo.write(f", {emojiNota(nota)}\n")
                 elif nota == 6:
                     biblioteca[nome].append("Não avaliado")
-                    arquivo.write(f", Não avaliado\n")
-
-                arquivo.close()
                 
                 for j in range(len(generoLista)):         
                     if not generoLista[j] in categorias:
                         if generoLista[j] != 'Hq':
                             categorias.append(generoLista[j])
-
-                gastosvalores.append(dinheiro)
 
                 os.system('clear')
                 print('📖 Você está cadastrando um novo livro')
@@ -153,6 +151,7 @@ def editar():
                             acao2 = int(input('Digite [1] para voltar: '))
                             if acao2 == 1:
                                 menu()
+                                break
                             else:
                                 print('❌ Código inválido!')
                                 time.sleep(1)
@@ -183,6 +182,7 @@ def editar():
                             acao2 = int(input('Digite [1] para voltar: '))
                             if acao2 == 1:
                                 menu()
+                                break
                             else:
                                 print('❌ Código inválido!')
                                 time.sleep(1)
@@ -232,6 +232,7 @@ def editar():
                             acao2 = int(input('Digite [1] para voltar: '))
                             if acao2 == 1:
                                 menu()
+                                break
                             else:
                                 print('❌ Código inválido!')
                                 time.sleep(1)
@@ -268,6 +269,7 @@ def editar():
                             acao2 = int(input('Digite [1] para voltar: '))
                             if acao2 == 1:
                                 menu()
+                                break
                             else:
                                 print('❌ Código inválido!')
                                 time.sleep(1)
@@ -311,6 +313,7 @@ def editar():
                             acao2 = int(input('Digite [1] para voltar: '))
                             if acao2 == 1:
                                 menu()
+                                break
                             else:
                                 print('❌ Código inválido!')
                                 time.sleep(1)
@@ -320,6 +323,7 @@ def editar():
             
             elif opcao == 6:
                 menu()
+                break
             
             else:
                 print('❌ Código inválido!')
@@ -433,7 +437,7 @@ def visualizar_livros():
                     os.system('clear')
                     print('👓 Você está na área de visualização de gastos')
                     print()
-                    print(f'💸 Gasto total: R${sum(gastosvalores):.2f}\n')
+                    print(f'💸 Gasto total: R${sum(gastos_valores):.2f}\n')
                     livros = []
                     for i in biblioteca.keys():
                         livros.append(i)
@@ -514,6 +518,7 @@ def excluir():
                         time.sleep(1)
             elif opcao == 2:
                 menu()
+                break
             else:
                 opcao += 'erro'
         except:
@@ -536,26 +541,29 @@ def filtrar_categoria(categoria):
     return livros
 
 def menu():
-    pasta_usuarios = './usuarios'
-    if not os.path.isdir(pasta_usuarios):
-        os.mkdir(pasta_usuarios)
-    arquivo = open(f'usuarios/{name}.csv', 'a')
-    arquivo.close()
     os.system('clear')
     print(f"📚 Olá {name}! Bem-vindo(a) ao Sistema de Gerenciamento de Leitura (SGL)")
     print()
     acao = int(input("[1] Visualizar a sua lista de livros\n[2] Adicionar um novo livro\n[3] Editar as informações de um livro\n[4] Excluir um livro\n[5] Sair\n\nDigite o número correspondente: "))
-    
+
     if acao == 1:
         os.system('clear')
         visualizar_livros()
+        return 1
     elif acao == 2:
         adicionar()
+        return 2
     elif acao == 3:
         editar()
+        return 3
     elif acao == 4:
         excluir()
+        return 4
     elif acao == 5:
+        arquivo = open(f"usuarios/{name}.csv", "w")
+        for livro in biblioteca.items():
+            arquivo.write(f"{livro[0]}, {livro[1][0]}, {livro[1][1]}, {livro[1][2]}, {livro[1][3]}\n")
+        arquivo.close()
         return 5
     else:
         print('❌ Código inválido!')
@@ -587,6 +595,39 @@ def emojiNota(nota):
 
 os.system('clear')
 name = input('Digite o seu nome: ')
+
+pasta_usuarios = './usuarios'
+if not os.path.isdir(pasta_usuarios):
+    os.mkdir(pasta_usuarios)
+
+arquivo = open(f"usuarios/{name}.csv", '+a', encoding='utf-8')
+
+if arquivo:
+    arquivo_criado = open(f"usuarios/{name}.csv", 'r', encoding='utf-8')
+
+    for livro in arquivo_criado.readlines():
+        abrindo = livro.find('[')
+        fechando = livro.find(']')
+        categorias_csv_nao_formatado = livro[abrindo + 1:fechando].replace("'", '').split(',')
+        categorias_csv = []
+        livro = livro.split(',')
+        livro_formatado = []
+
+        for categoria in categorias_csv_nao_formatado:
+            categorias_csv.append(categoria.replace(' ', ''))
+        
+        for valor in livro:
+            if valor.strip() not in categorias_csv:
+                livro_formatado.append(valor.strip())
+        
+        biblioteca[livro_formatado[0]] = [livro_formatado[1], categorias_csv, float(livro_formatado[len(categorias_csv) + 2]), livro_formatado[len(categorias_csv) + 3]]
+
+        gastos_valores.append(float(livro_formatado[len(categorias_csv) + 2]))
+
+    arquivo_criado.close()
+
+arquivo.close()
+
 acao = 0
 while acao != 5:
     try:
