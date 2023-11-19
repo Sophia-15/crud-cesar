@@ -2,7 +2,7 @@ import os
 import time
 
 biblioteca = {}
-categorias = ['Ação', 'Fantasia', 'Mistério', 'Suspense', 'Ficção Científica', 'Romance', 'Comédia', 'Mangá', 'HQ', 'Terror']
+categorias = ['Ação', 'Fantasia', 'Mistério', 'Suspense', 'Sci-Fi', 'Romance', 'Comédia', 'Mangá', 'HQ', 'Terror']
 gastos_valores = []
 
 def selecionar_livro(livro_selecionado, livros_categoria = []):
@@ -31,7 +31,7 @@ def listar_livros():
     for i in biblioteca.keys():
         livros.append(i)
     if livros == []:
-        print('Você ainda não possui livros')
+        print('\nVocê ainda não possui livros\n')
         return 'vazio'
     else:
         for i in range(len(livros)):
@@ -85,7 +85,7 @@ def adicionar():
                         os.system('cls')
                         print('📖 Você está cadastrando um novo livro')
                         print()
-                        nota = float(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não leu): "))
+                        nota = float(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não deseja avaliar): "))
                         break
                     except:
                         print('❌ Código inválido!')
@@ -105,6 +105,8 @@ def adicionar():
                     if not generoLista[j] in categorias:
                         if generoLista[j] != 'Hq':
                             categorias.append(generoLista[j])
+
+                gastos_valores.append(dinheiro)
 
                 os.system('cls')
                 print('📖 Você está cadastrando um novo livro')
@@ -259,6 +261,8 @@ def editar():
                                             print('✏️  Você está na Área de Edição de valores')
                                             print(f'\nValor atual do livro: R${biblioteca[selecionar_livro(livro_indice)][2]:.2f}')
                                             valor = float(input("\nDigite o novo valor do livro: "))
+                                            gastos_valores.remove(biblioteca[selecionar_livro(livro_indice)][2])
+                                            gastos_valores.append(valor)
                                             biblioteca[selecionar_livro(livro_indice)][2] = valor
                                             print('✅ Alterado com sucesso!')
                                             time.sleep(1)
@@ -359,7 +363,7 @@ def visualizar_livros():
             if opcao == 1:
                 while True:
                     os.system('cls')
-                    print('👓 Você está na área de visualização de livros')
+                    print('👓 Você está na área de visualização de livros\n')
                     Vazio = listar_livros()
                     try:    
                         if Vazio != 'vazio':
@@ -411,7 +415,7 @@ def visualizar_livros():
                         while True:
                             try:    
                                 os.system('cls')
-                                print(f'👓 Você está visualizando a categoria: {categoria}')
+                                print(f'👓 Você está visualizando a categoria: {categoria}\n')
                                 Vazio = filtrar_categoria(categoria)
                                 if Vazio != 'vazio': 
                                     opcao2 = int(input('\n[1] Visualizar livro \n[2] Voltar\n\nDigite o número correspondente: '))
@@ -474,10 +478,11 @@ def visualizar_livros():
                         os.system('cls')
                         print('👓 Você está na área de visualização de gastos')
                         print()
-                        print(f'💸 Gasto total: R${sum(gastos_valores):.2f}\n')
+                        print(f'💸 Gasto total: R${sum(gastos_valores):.2f}')
                         livros = []
                         for i in biblioteca.keys():
                             livros.append(i)
+                        print()
                         for i in range(len(livros)):
                             print(f"{i + 1}. {livros[i]} - R${biblioteca[livros[i]][2]:.2f}")
                         print()
@@ -530,6 +535,7 @@ def excluir():
                                     livro_indice = int(input("\nDigite o número do livro que deseja excluir: "))
                                     if selecionar_livro(livro_indice) != 'vazio':
                                         livro = selecionar_livro(livro_indice)
+                                        gastos_valores.remove(biblioteca[livro][2])
                                         biblioteca.pop(livro, 'Livro não encontrado')
                                         print('✅ Livro excluído com sucesso!')
                                         time.sleep(1)
@@ -544,9 +550,9 @@ def excluir():
                             while True:
                                 try:
                                     os.system('cls')
-                                    print('🗑️  Você está excluindo um livro\n')
+                                    print('🗑️  Você está excluindo um livro')
                                     listar_livros()
-                                    opcao2 = int(input('\nDigite [1] para voltar: '))
+                                    opcao2 = int(input('Digite [1] para voltar: '))
                                     if opcao2 == 1:
                                         break
                                     else:
