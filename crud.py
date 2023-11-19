@@ -44,11 +44,11 @@ def listar_categorias():
 def adicionar():
     while True:
         try:        
-            os.system('clear')
+            os.system('cls')
             opcao = int(input(f"📖 Você está cadastrando um novo livro\n\n[1] Continuar\n[2] Voltar\n\nDigite o número correspondente: "))
             if opcao == 1:
                 while True:
-                    os.system('clear')
+                    os.system('cls')
                     print('📖 Você está cadastrando um novo livro')
                     print()
                     nome = input("Digite o nome do livro que você deseja adicionar: ")
@@ -58,11 +58,11 @@ def adicionar():
                         time.sleep(1.5)
                     else:
                         break
-                os.system('clear')
+                os.system('cls')
                 print('📖 Você está cadastrando um novo livro')
                 print()
                 autor = input("Digite o nome do autor: ")
-                os.system('clear')
+                os.system('cls')
                 print('📖 Você está cadastrando um novo livro')
                 print()
                 print(f"Todas as categorias:")
@@ -72,7 +72,7 @@ def adicionar():
                 generoLista = genero.split(', ')
                 while True:
                     try:
-                        os.system('clear')
+                        os.system('cls')
                         print('📖 Você está cadastrando um novo livro')
                         print()
                         dinheiro = float(input("Digite o preço: "))
@@ -82,7 +82,7 @@ def adicionar():
                         time.sleep(1)
                 while True:
                     try:
-                        os.system('clear')
+                        os.system('cls')
                         print('📖 Você está cadastrando um novo livro')
                         print()
                         nota = float(input("Digite a sua nota pessoal de 0 a 5 (Digite 6 se ainda não deseja avaliar): "))
@@ -113,7 +113,7 @@ def adicionar():
 
                 gastos_valores.append(dinheiro)
 
-                os.system('clear')
+                os.system('cls')
                 print('📖 Você está cadastrando um novo livro')
                 print()
                 print('✅ Livro cadastrado com sucesso!')
@@ -130,7 +130,7 @@ def adicionar():
 def editar():
     while True:   
         try:
-            os.system('clear')
+            os.system('cls')
             opcao = int(input(f"✏️  Você está na Área de Edição\n\n[1] Alterar nome\n[2] Alterar autor\n[3] Alterar categoria\n[4] Alterar valor\n[5] Alterar nota\n[6] Voltar\n\nDigite o número correspondente: "))
 
             if opcao == 1:
@@ -138,12 +138,12 @@ def editar():
                     if listar_livros() != 'vazio':
                         while True:
                             try:
-                                os.system('clear')
+                                os.system('cls')
                                 print('✏️  Você está na Área de Edição de nomes\n')
                                 listar_livros()
                                 livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
                                 if selecionar_livro(livro_indice) != 'vazio':
-                                    os.system('clear')
+                                    os.system('cls')
                                     print('✏️  Você está na Área de Edição de nomes\n')
                                     print(f'Nome atual: {selecionar_livro(livro_indice)}')
                                     novo_nome = input('\nDigite o novo nome do livro: ')
@@ -160,7 +160,7 @@ def editar():
                     else:
                         while True:
                             try:
-                                os.system('clear')
+                                os.system('cls')
                                 print('✏️  Você está na Área de Edição de nomes\n')
                                 listar_livros()
                                 acao2 = int(input('Digite [1] para voltar: '))
@@ -181,12 +181,12 @@ def editar():
                     if listar_livros() != 'vazio':
                         while True:
                             try:
-                                os.system('clear')
+                                os.system('cls')
                                 print('✏️  Você está na Área de Edição de autores\n')
                                 listar_livros()
                                 livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
                                 if selecionar_livro(livro_indice) != 'vazio':
-                                    os.system('clear')
+                                    os.system('cls')
                                     print('✏️  Você está na Área de Edição de autores\n')
                                     print(f'Autor atual: {biblioteca[selecionar_livro(livro_indice)][0]}')
                                     autor = input("\nDigite o novo autor do livro: ")
@@ -203,7 +203,7 @@ def editar():
                     else:
                         while True:
                             try:
-                                os.system('clear')
+                                os.system('cls')
                                 print('✏️  Você está na Área de Edição de autores\n')
                                 listar_livros()
                                 acao2 = int(input('Digite [1] para voltar: '))
@@ -224,12 +224,12 @@ def editar():
                     if listar_livros() != 'vazio':
                         while True:
                             try:    
-                                os.system('clear')
+                                os.system('cls')
                                 print('✏️  Você está na Área de Edição de categorias\n')
                                 listar_livros()
                                 livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
                                 if selecionar_livro(livro_indice) != 'vazio':
-                                    os.system('clear')
+                                    os.system('cls')
                                     print('✏️  Você está na Área de Edição de categorias\n')
                                     print("Todas as categorias: ")
                                     listar_categorias()
@@ -265,7 +265,7 @@ def editar():
                     else:
                         while True:
                             try:
-                                os.system('clear')
+                                os.system('cls')
                                 print('✏️  Você está na Área de Edição de categorias\n')
                                 listar_livros()
                                 acao2 = int(input('Digite [1] para voltar: '))
@@ -286,14 +286,14 @@ def editar():
                     if listar_livros() != 'vazio':
                         while True:
                             try:
-                                os.system('clear')
+                                os.system('cls')
                                 print('✏️  Você está na Área de Edição de valores\n')
                                 listar_livros()
                                 livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
                                 if selecionar_livro(livro_indice) != 'vazio':
                                     while True:
                                         try:   
-                                            os.system('clear')
+                                            os.system('cls')
                                             print('✏️  Você está na Área de Edição de valores')
                                             print(f'\nValor atual do livro: R${biblioteca[selecionar_livro(livro_indice)][2]:.2f}')
                                             valor = float(input("\nDigite o novo valor do livro: "))
@@ -321,7 +321,7 @@ def editar():
                     else:
                         while True:
                             try:
-                                os.system('clear')
+                                os.system('cls')
                                 print('✏️  Você está na Área de Edição de valores\n')
                                 listar_livros()
                                 acao2 = int(input('Digite [1] para voltar: '))
@@ -342,14 +342,14 @@ def editar():
                     if listar_livros() != 'vazio':
                         while True:
                             try:
-                                os.system('clear')
+                                os.system('cls')
                                 print('✏️  Você está na Área de Edição de notas\n')
                                 listar_livros()
                                 livro_indice = int(input("\nDigite o número do livro que deseja editar: "))
                                 if selecionar_livro(livro_indice) != 'vazio':
                                     while True:
                                         try:
-                                            os.system('clear')
+                                            os.system('cls')
                                             print('✏️  Você está na Área de Edição de notas\n')
                                             print(f'Nota atual do livro: {biblioteca[selecionar_livro(livro_indice)][3]}')
                                             nota = float(input("\nDigite a nova nota do livro: "))
@@ -380,7 +380,7 @@ def editar():
                     else:
                         while True:
                             try:
-                                os.system('clear')
+                                os.system('cls')
                                 print('✏️  Você está na Área de Edição de notas\n')
                                 listar_livros()
                                 acao2 = int(input('Digite [1] para voltar: '))
@@ -410,12 +410,12 @@ def visualizar_livros():
     sair = 0
     while True: 
         try:
-            os.system('clear')
+            os.system('cls')
             opcao = int(input('👓 Você está na área de visualização\n\n[1] Visualizar livros\n[2] Visualizar por categoria\n[3] Visualizar gastos\n[4] Voltar\n\nDigite o número correspondente: '))
             
             if opcao == 1:
                 while True:
-                    os.system('clear')
+                    os.system('cls')
                     print('👓 Você está na área de visualização de livros\n')
                     Vazio = listar_livros()
                     try:    
@@ -424,7 +424,7 @@ def visualizar_livros():
                             if livro_indice != 0:
                                 livro = selecionar_livro(livro_indice)
                                 while True:
-                                    os.system('clear')
+                                    os.system('cls')
                                     print('👓 Você está na área de visualização de livro')
                                     print()
                                     visualizar_livro(livro)
@@ -457,7 +457,7 @@ def visualizar_livros():
             elif opcao == 2:
                 while True:
                     opcao2 = 0
-                    os.system('clear')
+                    os.system('cls')
                     print('👓 Você está na área de visualização por categoria')
                     print()
                     listar_categorias()
@@ -467,7 +467,7 @@ def visualizar_livros():
                         categoria = selecionar_categoria(categoria_indice)
                         while True:
                             try:    
-                                os.system('clear')
+                                os.system('cls')
                                 print(f'👓 Você está visualizando a categoria: {categoria}\n')
                                 Vazio = filtrar_categoria(categoria)
                                 if Vazio != 'vazio': 
@@ -481,7 +481,7 @@ def visualizar_livros():
                                 if opcao2 == 1:
                                     while True:
                                         try:    
-                                            os.system('clear')
+                                            os.system('cls')
                                             print(f'👓 Você está visualizando a categoria: {categoria}')
                                             print()
                                             livros_categoria = filtrar_categoria(categoria)
@@ -490,7 +490,7 @@ def visualizar_livros():
                                             livro = selecionar_livro(livro_indice, livros_categoria)
                                             while True:
                                                 try:
-                                                    os.system('clear')
+                                                    os.system('cls')
                                                     print('👓 Você está na área de visualização de livro')
                                                     print()
                                                     visualizar_livro(livro[0] if type(livro) == list else livro)
@@ -531,7 +531,7 @@ def visualizar_livros():
             elif opcao == 3:
                 while True:
                     try:    
-                        os.system('clear')
+                        os.system('cls')
                         print('👓 Você está na área de visualização de gastos')
                         print()
                         print(f'💸 Gasto total: R${sum(gastos_valores):.2f}')
@@ -578,14 +578,14 @@ def visualizar_livro(livro):
 def excluir():
     while True:
         try:
-            os.system('clear')   
+            os.system('cls')   
             opcao = int(input('🗑️  Você está excluindo um livro\n\n[1] Continuar\n[2] Voltar\n\nDigite o número correspondente: '))
             if opcao == 1:
                     try:
                         if listar_livros() != 'vazio':
                             while True:
                                 try:
-                                    os.system('clear')
+                                    os.system('cls')
                                     print('🗑️  Você está excluindo um livro\n')
                                     listar_livros()
                                     livro_indice = int(input("\nDigite o número do livro que deseja excluir: "))
@@ -605,7 +605,7 @@ def excluir():
                         else:
                             while True:
                                 try:
-                                    os.system('clear')
+                                    os.system('cls')
                                     print('🗑️  Você está excluindo um livro')
                                     listar_livros()
                                     opcao2 = int(input('Digite [1] para voltar: '))
@@ -643,13 +643,13 @@ def filtrar_categoria(categoria):
     return livros
 
 def menu():
-    os.system('clear')
+    os.system('cls')
     print(f"📚 Olá {name}! Bem-vindo(a) ao Sistema de Gerenciamento de Leitura (SGL)")
     print()
     acao = int(input("[1] Visualizar a sua lista de livros\n[2] Adicionar um novo livro\n[3] Editar as informações de um livro\n[4] Excluir um livro\n[5] Sair\n\nDigite o número correspondente: "))
 
     if acao == 1:
-        os.system('clear')
+        os.system('cls')
         visualizar_livros()
         return 1
     elif acao == 2:
@@ -691,7 +691,7 @@ def emojiNota(nota):
     elif nota == 5:
         return f'🌕🌕🌕🌕🌕'
 
-os.system('clear')
+os.system('cls')
 name = input('Digite o seu nome: ')
 
 pasta_usuarios = './usuarios'
