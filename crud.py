@@ -5,6 +5,11 @@ biblioteca = {}
 categorias = ['Ação', 'Fantasia', 'Mistério', 'Suspense', 'Sci-Fi', 'Romance', 'Comédia', 'Mangá', 'HQ', 'Terror']
 gastos_valores = []
 
+def salvar_no_arquivo():
+    with open(f"usuarios/{name}.csv", "w", encoding='utf-8') as arquivo:
+        for livro in biblioteca.items():
+            arquivo.write(f"{livro[0]}, {livro[1][0]}, {livro[1][1]}, {livro[1][2]}, {livro[1][3]}\n")
+
 def selecionar_livro(livro_selecionado, livros_categoria = []):
     livros = []
 
@@ -112,6 +117,7 @@ def adicionar():
                             categorias.append(generoLista[j])
 
                 gastos_valores.append(dinheiro)
+                salvar_no_arquivo()
 
                 os.system('cls')
                 print('📖 Você está cadastrando um novo livro')
@@ -148,6 +154,7 @@ def editar():
                                     print(f'Nome atual: {selecionar_livro(livro_indice)}')
                                     novo_nome = input('\nDigite o novo nome do livro: ')
                                     biblioteca[novo_nome] = biblioteca.pop(selecionar_livro(livro_indice), "Valor não encontrado")
+                                    salvar_no_arquivo()
                                     print('✅ Alterado com sucesso!')
                                     time.sleep(1)
                                     break
@@ -191,6 +198,7 @@ def editar():
                                     print(f'Autor atual: {biblioteca[selecionar_livro(livro_indice)][0]}')
                                     autor = input("\nDigite o novo autor do livro: ")
                                     biblioteca[selecionar_livro(livro_indice)][0] = autor
+                                    salvar_no_arquivo()
                                     print('✅ Alterado com sucesso!')
                                     time.sleep(1)
                                     break
@@ -253,6 +261,7 @@ def editar():
                                             categorias.append(categoriaLista[j])
                                             
                                     biblioteca[selecionar_livro(livro_indice)][1] = categoria
+                                    salvar_no_arquivo()
                                     print('✅ Alterado com sucesso!')
                                     time.sleep(1)
                                     break
@@ -300,6 +309,7 @@ def editar():
                                             gastos_valores.remove(biblioteca[selecionar_livro(livro_indice)][2])
                                             gastos_valores.append(valor)
                                             biblioteca[selecionar_livro(livro_indice)][2] = valor
+                                            salvar_no_arquivo()
                                             print('✅ Alterado com sucesso!')
                                             time.sleep(1)
                                             break
@@ -355,11 +365,13 @@ def editar():
                                             nota = float(input("\nDigite a nova nota do livro: "))
                                             if nota >= 0 and nota <= 5:
                                                 biblioteca[selecionar_livro(livro_indice)][3] = (emojiNota(nota)) 
+                                                salvar_no_arquivo()
                                                 print('✅ Alterado com sucesso!')
                                                 time.sleep(1)
                                                 break
                                             elif nota == 6:
                                                 biblioteca[selecionar_livro(livro_indice)][3] = ("Não avaliado")
+                                                salvar_no_arquivo()
                                                 print('✅ Alterado com sucesso!')
                                                 time.sleep(1)
                                                 break
@@ -395,6 +407,7 @@ def editar():
                 except:
                     print('❌ Código inválido!')
                     time.sleep(1)
+            
             elif opcao == 6:
                 break
             
@@ -593,6 +606,7 @@ def excluir():
                                         livro = selecionar_livro(livro_indice)
                                         gastos_valores.remove(biblioteca[livro][2])
                                         biblioteca.pop(livro, 'Livro não encontrado')
+                                        salvar_no_arquivo()
                                         print('✅ Livro excluído com sucesso!')
                                         time.sleep(1)
                                         break
@@ -734,9 +748,7 @@ arquivo.close()
 while True:
     try:
         if menu() == 5:
-            with open(f"usuarios/{name}.csv", "w", encoding='utf-8') as arquivo:
-                for livro in biblioteca.items():
-                    arquivo.write(f"{livro[0]}, {livro[1][0]}, {livro[1][1]}, {livro[1][2]}, {livro[1][3]}\n")
+            salvar_no_arquivo()
             break
     except:
         print('❌ Código inválido!')
