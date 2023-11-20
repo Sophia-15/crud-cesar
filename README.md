@@ -20,6 +20,9 @@ https://github.com/Sophia-15/crud-cesar/assets/117609505/79c17f8d-57d3-406c-8711
 ### 👓 Visualizando categoria específica:
 ![image](https://github.com/Sophia-15/crud-cesar/assets/117609505/c5f14c6f-7dde-4464-b4a3-a92a32a0185d)
 
+### ➡️ Fluxograma do código:
+![Fluxograma](https://github.com/Sophia-15/crud-cesar/assets/117609505/73ad8370-295b-4095-ab64-85a3f73d5f35)
+
 Desenvolvido por: **Arthur Vinícius, Gustavo Mourato, Paulo Rosado e Sophia Gallindo.** 👨‍💻
 
 *- Projeto desenvolvido para a disciplina de Fundamentos da Programação do 1º Período de Ciência da Computação na CESAR School -*
