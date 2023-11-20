@@ -85,11 +85,11 @@ def visualizar_livros():
                 while True:
                     os.system('cls')
                     print('👓 Você está na área de visualização de livros\n')
-                    Vazio = listar_livros()
+                    livros = listar_livros()
                     try:    
-                        if Vazio != 'vazio':
+                        if livros != 'vazio':
                             livro_indice = int(input("\nDigite o número do livro que deseja visualizar: "))
-                            if livro_indice != 0:
+                            if len(livros) + 1 > livro_indice > 0:
                                 livro = selecionar_livro(livro_indice)
                                 while True:
                                     os.system('cls')
@@ -132,66 +132,74 @@ def visualizar_livros():
                     print()
                     try:
                         categoria_indice = int(input("Digite o número da categoria que você deseja filtrar por: "))
-                        categoria = selecionar_categoria(categoria_indice)
-                        while True:
-                            try:    
-                                os.system('cls')
-                                print(f'👓 Você está visualizando a categoria: {categoria}\n')
-                                Vazio = filtrar_categoria(categoria)
-                                if Vazio != 'vazio': 
-                                    opcao2 = int(input('\n[1] Visualizar livro \n[2] Voltar\n\nDigite o número correspondente: '))
-                                else:
-                                    sair = int(input('Digite [1] para voltar: '))
-                                    if sair == 1:
-                                        break
+                        if categoria_indice > 0:
+                            categoria = selecionar_categoria(categoria_indice)
+                            while True:
+                                try:    
+                                    os.system('cls')
+                                    print(f'👓 Você está visualizando a categoria: {categoria}\n')
+                                    Vazio = filtrar_categoria(categoria)
+                                    if Vazio != 'vazio': 
+                                        opcao2 = int(input('\n[1] Visualizar livro \n[2] Voltar\n\nDigite o número correspondente: '))
                                     else:
-                                        sair += 'erro'
-                                if opcao2 == 1:
-                                    while True:
-                                        try:    
-                                            os.system('cls')
-                                            print(f'👓 Você está visualizando a categoria: {categoria}')
-                                            print()
-                                            livros_categoria = filtrar_categoria(categoria)
-                                            print()
-                                            livro_indice = int(input("Digite o número do livro que deseja visualizar: "))
-                                            livro = selecionar_livro(livro_indice, livros_categoria)
-                                            while True:
-                                                try:
-                                                    os.system('cls')
-                                                    print('👓 Você está na área de visualização de livro')
-                                                    print()
-                                                    visualizar_livro(livro[0] if type(livro) == list else livro)
-                                                    print()
-                                                    opcao2 = int(input('Digite [1] para voltar: '))
+                                        sair = int(input('Digite [1] para voltar: '))
+                                        if sair == 1:
+                                            break
+                                        else:
+                                            sair += 'erro'
+                                    if opcao2 == 1:
+                                        while True:
+                                            try:    
+                                                os.system('cls')
+                                                print(f'👓 Você está visualizando a categoria: {categoria}')
+                                                print()
+                                                livros_categoria = filtrar_categoria(categoria)
+                                                print()
+                                                livro_indice = int(input("Digite o número do livro que deseja visualizar: "))
+                                                if livro_indice > 0:
+                                                    livro = selecionar_livro(livro_indice, livros_categoria)
+                                                    while True:
+                                                        try:
+                                                            os.system('cls')
+                                                            print('👓 Você está na área de visualização de livro')
+                                                            print()
+                                                            visualizar_livro(livro[0] if type(livro) == list else livro)
+                                                            print()
+                                                            opcao2 = int(input('Digite [1] para voltar: '))
 
+                                                            if opcao2 == 1:
+                                                                break
+                                                            else:
+                                                                print('❌ Código inválido!')
+                                                                time.sleep(1)
+                                                        except:
+                                                            print('❌ Código inválido!')
+                                                            time.sleep(1)
                                                     if opcao2 == 1:
                                                         break
-                                                    else:
-                                                        print('❌ Código inválido!')
-                                                        time.sleep(1)
-                                                except:
+                                                else:
                                                     print('❌ Código inválido!')
                                                     time.sleep(1)
-                                            if opcao2 == 1:
-                                                break
-                                        except:
-                                            print('❌ Código inválido!')
-                                            time.sleep(1)
-                                elif opcao2 == 2:
-                                    break
-                                else:
+                                            except:
+                                                print('❌ Código inválido!')
+                                                time.sleep(1)
+                                    elif opcao2 == 2:
+                                        break
+                                    else:
+                                        print('❌ Código inválido!')
+                                        time.sleep(1)
+                                except:
                                     print('❌ Código inválido!')
                                     time.sleep(1)
-                            except:
-                                print('❌ Código inválido!')
-                                time.sleep(1)
 
-                        if sair == 1:
-                            break 
+                            if sair == 1:
+                                break 
 
-                        if opcao2 == 2:
-                            break
+                            if opcao2 == 2:
+                                break
+                        else:
+                            print('❌ Código inválido!')
+                            time.sleep(1)
                     except:
                         print('❌ Código inválido!')
                         time.sleep(1)
@@ -203,14 +211,16 @@ def visualizar_livros():
                         print('👓 Você está na área de visualização de gastos')
                         print()
                         print(f'💸 Gasto total: R${sum(gastos_valores):.2f}')
+                        print()
                         livros = []
                         for i in biblioteca.keys():
                             livros.append(i)
-                        print()
                         for i in range(len(livros)):
                             print(f"{i + 1}. {livros[i]} - R${biblioteca[livros[i]][2]:.2f}")
-                        print()
-                        opcao2 = int(input('Digite [1] para voltar: '))
+                        if len(livros) > 0:
+                            opcao2 = int(input('\nDigite [1] para voltar: '))
+                        else:
+                            opcao2 = int(input('Digite [1] para voltar: '))
                         if opcao2 == 1:
                             break
                         else:
@@ -666,7 +676,7 @@ def excluir():
                             while True:
                                 try:
                                     os.system('cls')
-                                    print('🗑️  Você está excluindo um livro')
+                                    print('🗑️  Você está excluindo um livro\n')
                                     listar_livros()
                                     opcao2 = int(input('Digite [1] para voltar: '))
                                     if opcao2 == 1:
@@ -694,14 +704,13 @@ def selecionar_livro(livro_selecionado, livros_categoria = []):
 
     livro_selecionado -= 1
 
-    if len(livros_categoria) > 0 and livro_selecionado + 1 != 0 and livro_selecionado > 0:
-        return livros_categoria[livro_selecionado]
-
     for livro in biblioteca.keys():
         livros.append(livro)
     
     if (livro_selecionado) < len(livros) and livro_selecionado >= 0 and livro_selecionado + 1 != 0:
         return livros[livro_selecionado]
+    elif len(livros_categoria) > 0 and livro_selecionado + 1 != 0 and livro_selecionado >= 0:
+        return livros_categoria[livro_selecionado]
     else:
         return 'vazio'
 
@@ -722,6 +731,7 @@ def listar_livros():
     else:
         for i in range(len(livros)):
             print(f"{i + 1}. {livros[i]}")
+        return livros
 
 #Função para listar todas as categorias
 def listar_categorias():
@@ -767,7 +777,6 @@ armazenar_dicionario()
 while True:
     try:
         if menu() == 5:
-            salvar_no_arquivo()
             break
     except:
         print('❌ Código inválido!')
