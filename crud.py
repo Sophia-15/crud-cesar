@@ -483,9 +483,11 @@ def editar():
                                     categoriaLista = categoria.split(', ')
                                     for j in range(len(categoriaLista)):
                                         if not categoriaLista[j] in categorias:
-                                            categorias.append(categoriaLista[j])
+                                            if categoriaLista[j] != 'Hq':
+                                                categorias.append(categoriaLista[j])
                                             
-                                    biblioteca[selecionar_livro(livro_indice)][1] = categoria
+                                            
+                                    biblioteca[selecionar_livro(livro_indice)][1] = categoriaLista
                                     salvar_no_arquivo()
                                     print('✅ Alterado com sucesso!')
                                     time.sleep(1)
@@ -707,10 +709,10 @@ def selecionar_livro(livro_selecionado, livros_categoria = []):
     for livro in biblioteca.keys():
         livros.append(livro)
     
-    if (livro_selecionado) < len(livros) and livro_selecionado >= 0 and livro_selecionado + 1 != 0:
-        return livros[livro_selecionado]
-    elif len(livros_categoria) > 0 and livro_selecionado + 1 != 0 and livro_selecionado >= 0:
+    if len(livros_categoria) > 0 and livro_selecionado + 1 != 0 and livro_selecionado >= 0:
         return livros_categoria[livro_selecionado]
+    elif (livro_selecionado) < len(livros) and livro_selecionado >= 0 and livro_selecionado + 1 != 0:
+        return livros[livro_selecionado]
     else:
         return 'vazio'
 
